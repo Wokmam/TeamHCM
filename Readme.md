@@ -147,11 +147,13 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
 
 ### 2.2. Caja de Engranajes y Sistema Diferencial
 La potencia del motor no va directo a las ruedas; pasa a través de una etapa de reducción y se distribuye mediante un diferencial mecánico.
+
 < align="center">
 <img width="600" alt="WhatsApp Image 2026-06-25 at 2 18 30 PM" src="https://github.com/user-attachments/assets/7ccc4d4e-c101-4fce-bc00-fd147a64d0a5" />
 </p>
+
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
-* **Motivos de Selección e Implementación:**
+    * **Motivos de Selección e Implementación:**
     * **Dinámica de Giro (Evitar Derrapes):** En las curvas de la WRO, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial (eje rígido), una de las ruedas se vería obligada a patinar, provocando pérdida de tracción, un aumento drástico en el consumo de corriente y descalibración de la odometría basada en el encoder.
     * **Preservación de la Odometría:** Al permitir que las ruedas giren a velocidades distintas de forma natural, las lecturas del encoder (si está posicionado antes del diferencial o promediando ambas ruedas) reflejan con mayor precisión el desplazamiento real del centro de masa del robot.
     * **Caja de Engranajes (Gearbox):** Ajusta la relación de transmisión final para adaptar las 600 RPM del motor al diámetro específico de nuestras ruedas, asegurando que el motor trabaje en su zona de máxima eficiencia (alrededor del 50-70% de su velocidad de vacío).
