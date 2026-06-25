@@ -125,7 +125,7 @@ El tren trasero es el encargado de proveer el par motor y la velocidad necesario
 Para la propulsión se seleccionó un motor de corriente continua (DC) equipado con un encoder de cuadratura.
 
 * **Especificaciones Clave:**
-    * **Velocidad nominal:** 600 RPM (a voltaje nominal).
+    * **Velocidad:** 600 RPM .
     * **Tipo de sensor:** Encoder de cuadratura (Efecto Hall).
 * **Motivos de Selección:**
     * **Relación Velocidad/Torque Balanceada:** El motor ofrece una velocidad de 600rpm, manteniendo el torque suficiente para superar la inercia inicial sin saturar el consumo eléctrico.
