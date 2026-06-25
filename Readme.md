@@ -42,7 +42,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       </td>
     </tr>
     <tr>
-      <td align="center" valign="middle">1</td>
+      <td align="center" valign="middle">3</td>
       <td align="left" valign="middle">Sensor Ultrasonido HC-SR04</td>
       <td align="center">
         <img width="251" height="200" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
