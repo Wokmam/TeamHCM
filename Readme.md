@@ -70,7 +70,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="350" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
+    <img width="250" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>N20 Motor Specifications:</h3>
