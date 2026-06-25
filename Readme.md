@@ -111,7 +111,7 @@ Este módulo describe la arquitectura de locomoción del vehículo, detallando l
 ---
 
 ## 1. Arquitectura General del Sistema
-El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada con un sistema de **Dirección Delantera**. Esta disposición emula el comportamiento de un automóvil real, optimizando la estabilidad en línea recta y permitiendo una distribución de peso idónea para las curvas exigentes de la competencia.
+El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada con un sistema de **Dirección Delantera**. Esta disposición emula el comportamiento de un automóvil real, optimizando la estabilidad en línea recta y permitiendo una distribución de peso idónea para las curvas.
 <p align="center">
 <img width="407" alt="aa" src="https://github.com/user-attachments/assets/1617e8e5-d2b2-4e00-866d-53f5e1a5e37c" />
 </p>
