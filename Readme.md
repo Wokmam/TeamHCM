@@ -29,9 +29,9 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     </tr>
     <tr>
       <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Logitech® HD Webcam C270</td>
+      <td align="left" valign="middle">MPU6050</td>
       <td align="center">
-        <img src="RUTA_DE_TU_IMAGEN_WEBCAM.png" width="350" alt="Logitech Webcam">
+        <img width="1000" height="750" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2" src="https://github.com/user-attachments/assets/99e2241a-d39e-48c4-9c1e-f6a192a3b2bd" />
       </td>
     </tr>
   </tbody>
