@@ -92,8 +92,8 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>SG90 Servo Specifications:</h3>
       <ul>
-        <li><strong>Operating Voltage:</strong>Tipo: Digital</li>
-        <li><strong>Operating Speed:</strong> 0.12 sec/60° (4.8V)</li>
+        <li><strong>Tipo:</strong> Digital</li>
+        <li><strong>Velocidad:</strong> 0.12 sec/60° (4.8V)</li>
         <li><strong>Torque:</strong> 1.8 kg-cm (4.8V)</li>
         <li><strong>Voltaje:</strong> 5V</li>
         <li><strong>Rango de Operación:</strong> 0°-180°</li>
