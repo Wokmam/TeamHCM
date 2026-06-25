@@ -169,6 +169,22 @@ La precisión en el direccionamiento es fundamental para que el robot esquive lo
 ### 3.1. Actuador de Dirección: Servomotor
 El control angular de las ruedas delanteras se realiza mediante un servomotor de alta precisión conectado a una geometría de dirección.
 
+<table>
+  <tr>    
+    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
+    <img width="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
+    </td>
+    <td width="60%" valign="middle" bgcolor="#0d1117">
+      <h3>Especificaciones:</h3>
+      <ul>
+        <li><strong>Voltaje de Nominal:</strong> 12V</li>
+        <li><strong>Velocidad:</strong> 600 RPM</li>
+        <li><strong>Tipo de Encoder:</strong> Encoder de cuadratura (Efecto Hall) de fase A y B con 120 PPR en el eje de salida</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
 * **Motivos de Selección:**
     * **Control de Posición Absoluto:** A diferencia de un motor DC común, el servomotor permite definir un ángulo exacto (por ejemplo, 95° para ir recto, 115° para girar a la derecha) mediante señales PWM, eliminando la necesidad de sensores de fin de carrera o calibraciones complejas al inicio de la ronda.
     * **Torque de Retención:** Cuando el robot avanza a alta velocidad, las irregularidades de la pista o la fricción tienden a desviar las ruedas delanteras. El servomotor posee el torque suficiente para mantener firmemente la posición angular deseada.
