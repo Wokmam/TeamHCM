@@ -76,7 +76,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       <h3>N20 Motor Specifications:</h3>
       <ul>
         <li><strong>Microcontrolador:</strong> ATmega2560</li>
-        <li><strong>Consumo mA</strong> 20mA</li>
+        <li><strong>Consumo mA:</strong> 20mA</li>
         <li><strong>Entradas Analógicas:</strong> 16</li>
         <li><strong>Pines Digitales E/S:</strong> 54 (de los cuales 15 son salidas PWM)</li>
         <li><strong>Voltaje de Operación:</strong> 5V</li>
