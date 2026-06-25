@@ -127,7 +127,7 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones:</h3>
       <ul>
-        <li><strong>Voltaje de Nominal:</strong> 12V</li>
+        <li><strong>Voltaje Nominal:</strong> 12V</li>
         <li><strong>Velocidad:</strong> 600 RPM</li>
         <li><strong>Tipo de Encoder:</strong> Encoder de cuadratura (Efecto Hall) de fase A y B con 120 PPR en el eje de salida</li>
       </ul>
@@ -136,7 +136,7 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
 </table>
 
 * **Motivos de Selección:**
-    * **Cálculo de Odometría Lineal:** El propósito fundamental del encoder es la odometría. Al counting los pulsos generados por las vueltas del motor, el firmware calcula con precisión cuántos centímetros ha avanzado el vehículo en la pista. Esto nos permite programar desplazamientos basados en distancias exactas (por ejemplo: avanzar exactamente 100cm antes de iniciar el giro).
+    * **Cálculo de Odometría Lineal:** El propósito fundamental del encoder es la odometría. Al contar los pulsos generados por las vueltas del motor, el firmware calcula con precisión cuántos centímetros ha avanzado el vehículo en la pista. Esto nos permite programar desplazamientos basados en distancias exactas (por ejemplo: avanzar exactamente 100cm antes de iniciar el giro).
 
 ### 2.2. Caja de Engranajes y Sistema Diferencial
 La potencia del motor no va directo a las ruedas; pasa a través de una etapa de reducción y se distribuye mediante un diferencial mecánico.
@@ -152,7 +152,7 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
     * **Evitar derrapes:** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
 
 ## 3. Sistema de Dirección (Tren Delantero)
-En parte de dirección, la precisión es vital para que el robot no se desvíe de los ángulos deseados y mantenga trayectorias repetibles.
+En el sistema de dirección, la precisión es vital para que el robot no se desvíe de los ángulos deseados y mantenga trayectorias repetibles.
   
 ### 3.1. Actuador de Dirección: Servomotor
 El control angular de las ruedas delanteras se realiza mediante un servomotor de alta precisión conectado a una geometría de dirección.
