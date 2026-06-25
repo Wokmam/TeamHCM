@@ -75,11 +75,11 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>N20 Motor Specifications:</h3>
       <ul>
-        <li><strong>Microcontrolador:</strong>ATmega2560</li>
-        <li><strong>No-load Speed:</strong> 500RPM</li>
+        <li><strong>Microcontrolador:</strong> ATmega2560</li>
+        <li><strong>Entradas Analógicas:</strong> 16</li>
         <li><strong>Stall Torque:</strong> 0.15kg-cm</li>
-        <li><strong>Current:</strong> 0.023A</li>
-        <li><strong>Gear Ratio:</strong> 1:100</li>
+        <li><strong>Pines Digitales E/S:</strong> 54 (de los cuales 15 son salidas PWM)</li>
+        <li><strong>Voltaje de Operación:</strong> 5V</li>
       </ul>
     </td>
   </tr>
