@@ -126,7 +126,7 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img width="350" alt="51+JncrV17L _SX522_-removebg-preview" src="https://github.com/user-attachments/assets/6a83c77a-f4a3-4415-80d0-be58ab4c0c7c" />
+      <img width="300" alt="51+JncrV17L _SX522_-removebg-preview" src="https://github.com/user-attachments/assets/6a83c77a-f4a3-4415-80d0-be58ab4c0c7c" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones:</h3>
