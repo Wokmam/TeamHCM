@@ -66,7 +66,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 </table>
 
 
-<h2>GArduino Mega Pro Mini</h2>
+<h1>GArduino Mega Pro Mini</h1>
 
 <table>
   <tr>    
