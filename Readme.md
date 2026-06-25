@@ -163,7 +163,7 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 La precisión en el direccionamiento es fundamental para que el robot esquive los obstáculos (pilares verdes y rojos) de forma consistente.
 
 <p align="center">
-<img width="1280" height="392" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
+<img width="800" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
 </p>
   
 ### 3.1. Actuador de Dirección: Servomotor
