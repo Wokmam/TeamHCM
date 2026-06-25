@@ -186,3 +186,63 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 | **Diferencial Mecánico** | Distribución de par en eje trasero | Eje rígido (Spool) | El eje rígido causaba subgiro (*understeer*) severo, haciendo que el robot chocara contra las paredes al intentar giros de 90 grados. |
 | **Servomotor** | Control de dirección | Motor DC + Cremallera | El servomotor simplifica el software gracias a su bucle de control interno de posición y ofrece un retorno exacto al centro (0°). |
 | **Geometría Ackerman** | Mecanismo de dirección | Dirección paralela simple | Evita el arrastre de los neumáticos delanteros, maximizando el agarre y la repetibilidad de las trayectorias autónomas. |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th align="center">Quantity</th>
+      <th align="left">Status</th>
+      <th align="center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">Raspberry Pi 4 Model B</td>
+      <td align="center">
+        <img width="250" alt="Raspberry Pi 4" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">MPU6050</td>
+      <td align="center">
+        <img width="220" alt="MPU6050" src="https://github.com/user-attachments/assets/85fb2310-4ff0-4bd1-a56f-6e161a458451" />
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">Puente H TB6612FNG</td>
+      <td align="center">
+        <img width="220" alt="TB6612FNG" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
+      </td>
+    </tr>
+  </tbody>
+</table>
