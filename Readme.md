@@ -200,7 +200,7 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
       <td align="center" valign="middle">1</td>
       <td align="left" valign="middle">Raspberry Pi 4 Model B</td>
       <td align="center">
-        <img width="500" height="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/066d5348-7654-476c-9065-e70d8045de8d" />
+        <img width="350" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/066d5348-7654-476c-9065-e70d8045de8d" />
       </td>
     </tr>
     <tr>
