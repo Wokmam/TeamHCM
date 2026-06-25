@@ -22,7 +22,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
   <tbody>
     <tr>
       <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Raspberry Pi 4 Model B</td>
+      <td align="left" valign="middle">Arduino Mega Pro Mini</td>
       <td align="center">
         <img width="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
       </td>
@@ -43,7 +43,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     </tr>
     <tr>
       <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Sensire Ultrasonido HC-SR04</td>
+      <td align="left" valign="middle">Sensor Ultrasonido HC-SR04</td>
       <td align="center">
         <img width="251" height="200" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
       </td>
