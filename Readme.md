@@ -190,7 +190,7 @@ El control angular de las ruedas delanteras se realiza mediante un servomotor de
 * **Motivos de Selección:**
     * **Control de Posición Absoluto:** A diferencia de un motor DC común, el servomotor permite definir un ángulo exacto (por ejemplo, 95° para ir recto, 115° para girar a la derecha) mediante señales PWM, eliminando la necesidad de sensores de fin de carrera o calibraciones complejas al inicio de la ronda.
 * **Transmisión de Engranajes Metálicos (Robustez Térmica y Mecánica):** Se seleccionó específicamente un servomotor con piñonería metálica en lugar de uno con engranajes de plástico. En pruebas previas, los componentes de plástico experimentaban un desgaste excesivo debido al estrés mecánico, lo que provocaba un aumento crítico en la temperatura del actuador y fallos por rotura de dientes. Los engranajes metálicos ofrecen la tolerancia al torque y la disipación térmica necesarias para soportar las exigencias.
-* 
+
 ### 3.2. Geometría de Dirección (Principio de Ackerman)
 El varillaje mecánico de la dirección delantera está diseñado siguiendo geométricamente el principio de **Ackerman**.
 
