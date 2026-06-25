@@ -190,16 +190,8 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
     * **Estructura Impresa en 3D:** Al igual que el tren trasero, las varillas y las manguetas de la dirección están fabricados totalmente mediante impresión 3D en **PETG**.
     * **Rodamientos en Ruedas Delanteras:** Para mejorar la fluidez del movimiento, se incorporaron rodamientos en ambas ruedas delanteras. Esto disminuye la fricción al rodar, asegurando que las llantas delanteras giren mucho mejor y respondan mejor a los cambios de dirección.
 
-## 4. Matriz de Justificación de Componentes (Resumen para Jueces)
 
-| Componente | Función | Alternativa evaluada | ¿Por qué se eligió? |
-| :--- | :--- | :--- | :--- |
-| **Motor DC 600 RPM** | Propulsión principal | Motor DC de 1000 RPM | El de 1000 RPM sacrificaba demasiado par motor (torque), dificultando las aceleraciones rápidas tras frenar en curvas cerradas. |
-| **Encoder Integrado** | Retroalimentación de velocidad | Sensor óptico en llanta | Mayor resolución por revolución, protegido contra interferencias de luz ambiental de la pista y menor complejidad mecánica. |
-| **Diferencial Mecánico** | Distribución de par en eje trasero | Eje rígido (Spool) | El eje rígido causaba subgiro (*understeer*) severo, haciendo que el robot chocara contra las paredes al intentar giros de 90 grados. |
-| **Servomotor** | Control de dirección | Motor DC + Cremallera | El servomotor simplifica el software gracias a su bucle de control interno de posición y ofrece un retorno exacto al centro (0°). |
-| **Geometría Ackerman** | Mecanismo de dirección | Dirección paralela simple | Evita el arrastre de los neumáticos delanteros, maximizando el agarre y la repetibilidad de las trayectorias autónomas. |
-
+<h2>Lista de Componentes
 <table>
   <thead>
     <tr>
