@@ -74,7 +74,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <img width="250" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>N20 Motor Specifications:</h3>
+      <h3>Especificaciones:</h3>
       <ul>
         <li><strong>Microcontrolador:</strong> ATmega2560</li>
         <li><strong>Consumo mA:</strong> 20mA</li>
@@ -90,7 +90,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <img width="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>SG90 Servo Specifications:</h3>
+      <h3>Especificaciones:</h3>
       <ul>
         <li><strong>Tipo:</strong> Digital</li>
         <li><strong>Velocidad:</strong> 0.12 sec/60° (4.8V)</li>
@@ -106,7 +106,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>S:</h3>
+      <h3>Especificaciones:</h3>
       <ul>
         <li><strong>Operating Voltage:</strong>Tipo: Digital</li>
         <li><strong>Operating Speed:</strong> 0.12 sec/60° (4.8V)</li>
