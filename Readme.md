@@ -57,7 +57,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     </tr>
     <tr>
       <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Puente H TB6612FNG</td>
+      <td align="left" valign="middle">Motor DC 600rpm con Encoder Rotativo</td>
       <td align="center">
         <img width="500" alt="800x800-removebg-preview" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
       </td>
