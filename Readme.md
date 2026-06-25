@@ -149,7 +149,7 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
 La potencia del motor no va directo a las ruedas; pasa a través de una etapa de reducción y se distribuye mediante un diferencial mecánico.
 
 <p align="center">
-<img width="1280" alt="vehicle-front" src="https://github.com/user-attachments/assets/38d71b13-060d-472b-8ce9-e2b03e79cb97" />
+<img width="500" alt="WhatsApp Image 2026-06-25 at 2 18 30 PM" src="https://github.com/user-attachments/assets/fa271de6-48d6-460b-a5a0-76fb4603ecc5" />
 </p>
 
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
@@ -162,8 +162,8 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 La precisión en el direccionamiento es fundamental para que el robot esquive los obstáculos (pilares verdes y rojos) de forma consistente.
 
-<p align="center"
-<img width="1280" height="392" alt="vehicle-front" src="https://github.com/user-attachments/assets/712d6559-9d91-4c77-817c-6fbcf2b87f92" />
+<p align="center">
+<img width="1280" height="392" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
 </p>
   
 ### 3.1. Actuador de Dirección: Servomotor
