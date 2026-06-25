@@ -105,7 +105,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 
  <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img src="URL_DE_TU_IMAGEN_TB6612FNG.png" alt="Puente H TB6612FNG" width="100%" />
+    <img width="500" alt="800x800-removebg-preview" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones del Controlador TB6612FNG:</h3>
