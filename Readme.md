@@ -143,7 +143,7 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
 
 * **Motivos de Selección:**
     * **Relación Velocidad/Torque Balanceada:** El motor ofrece una velocidad de 600rpm, manteniendo el torque suficiente para superar la inercia inicial sin saturar el consumo eléctrico.
-    * **Cálculo de Odometría Lineal:** El propósito fundamental del encoder es la odometría. Al contar los pulsos generados por las vueltas del motor, el firmware calcula con precisión cuántos centímetros ha avanzado el vehículo en la pista. Esto nos permite programar desplazamientos basados en distancias exactas (por ejemplo: avanzar exactamente 100cm antes de iniciar el giro).
+    * **Cálculo de Odometría Lineal:** El propósito fundamental del encoder es la odometría. Al counting los pulsos generados por las vueltas del motor, el firmware calcula con precisión cuántos centímetros ha avanzado el vehículo en la pista. Esto nos permite programar desplazamientos basados en distancias exactas (por ejemplo: avanzar exactamente 100cm antes de iniciar el giro).
 
 ### 2.2. Caja de Engranajes y Sistema Diferencial
 La potencia del motor no va directo a las ruedas; pasa a través de una etapa de reducción y se distribuye mediante un diferencial mecánico.
@@ -154,6 +154,8 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
 * **Motivos de Selección e Implementación:**
+    * **Manufactura Aditiva Avanzada:** Todo el conjunto del mecanismo diferencial ha sido fabricado mediante impresión 3D utilizando filamento **PETG**. Se seleccionó este material debido a su alta resistencia al impacto, durabilidad mecánica superior frente al PLA y una excelente flexibilidad estructural que evita fracturas por fatiga en los engranajes.
+    * **Integración de Rodamientos:** Para soportar el movimiento del diferencial, se integraron rodamientos de bolas de alta precisión. Esto es fundamental para evitar por completo atascos mecánicos en la piñonería, reducir la fricción interna a niveles mínimos y permitir un giro mucho más suave y eficiente del eje.
     * **Dinámica de Giro (Evitar Derrapes):** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
     * **Preservación de la Odometría:** Al permitir que las ruedas giren a velocidades distintas de forma natural, las lecturas del encoder reflejan con mayor precisión el desplazamiento real del centro de masa del robot.
 
@@ -193,11 +195,11 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 <img width="800" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
 </p>
 
-* **Justificación Técnica:**
-    * Este sistema asegura que, al girar, la rueda delantera interna rote un ángulo ligeramente mayor que la rueda delantera externa. Esto se debe a que ambas ruedas deben pivotar respecto al mismo centro de rotación instantáneo (compartido con el eje trasero). 
-    * Al implementar Ackerman, se reduce casi a cero el deslizamiento lateral (*slip*) de los neumáticos delanteros, permitiendo giros limpios, predecibles y cerrados en las esquinas del circuito.
-
----
+* **Justificación Técnica y Componentes:**
+    * **Estructura Íntegramente Impresa en 3D:** Al igual que el tren trasero, el sistema de varillaje y las manguetas de la dirección están fabricados en su totalidad mediante impresión 3D en **PETG**, garantizando ligereza mecánica sin sacrificar rigidez ante los giros bruscos del servomotor.
+    * **Rodamientos en Ruedas Delanteras:** Para maximizar la fluidez del movimiento dinámico, se incorporaron rodamientos en ambas ruedas delanteras de manera independiente. Esto disminuye drásticamente el coeficiente de fricción al rodar, asegurando que las llantas delanteras giren mucho mejor y respondan de forma inmediata a los cambios de dirección impuestos por el algoritmo de navegación.
+    * **Principio Cinemático:** Este sistema asegura que, al girar, la rueda delantera interna rote un ángulo ligeramente mayor que la rueda delantera externa. Esto se debe a que ambas ruedas deben pivotar respecto al mismo centro de rotación instantáneo (compartido con el eje trasero). 
+    * **Reducción del Deslizamiento:** Al implementar Ackerman, se reduce casi a cero el deslizamiento lateral (*slip*) de los neumáticos delanteros, permitiendo giros limpios, predecibles y cerrados en las esquinas del circuito.
 
 ## 4. Matriz de Justificación de Componentes (Resumen para Jueces)
 
