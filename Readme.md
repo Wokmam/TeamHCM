@@ -111,7 +111,7 @@ El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada
 <p align="center">
 <img width="407" alt="aa" src="https://github.com/user-attachments/assets/1617e8e5-d2b2-4e00-866d-53f5e1a5e37c" />
 </p>
----
+
 
 ## 2. Sistema de Tracción (Tren Trasero)
 
