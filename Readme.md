@@ -24,7 +24,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       <td align="center" valign="middle">1</td>
       <td align="left" valign="middle">Raspberry Pi 4 Model B</td>
       <td align="center">
-        <img width="500" height="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
+        <img width="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
       </td>
     </tr>
     <tr>
