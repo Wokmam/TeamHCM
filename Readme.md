@@ -123,6 +123,22 @@ El tren trasero es el encargado de proveer el par motor y la velocidad necesario
 
 ### 2.1. Actuador Principal: Motor DC con Encoder (600 RPM)
 Para la propulsión se seleccionó un motor de corriente continua (DC) equipado con un encoder de cuadratura.
+  <tr>    
+    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
+      <img width="500" height="500" alt="51+JncrV17L _SX522_-removebg-preview" src="https://github.com/user-attachments/assets/6a83c77a-f4a3-4415-80d0-be58ab4c0c7c" />
+    </td>
+    <td width="60%" valign="middle" bgcolor="#0d1117">
+      <h3>Especificaciones:</h3>
+      <ul>
+        <li><strong>Voltaje de operación:</strong> 5V</li>
+        <li><strong>Rango de medición:</strong> 2 cm a 400 cm</li>
+        <li><strong>Precisión:</strong> ±3 mm</li>
+        <li><strong>Ángulo de apertura:</strong> Menor a 15°</li>
+        <li><strong>Corriente de trabajo:</strong> 15 mA</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 * **Especificaciones Clave:**
     * **Velocidad:** 600 RPM .
