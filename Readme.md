@@ -154,11 +154,9 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
 * **Motivos de Selección e Implementación:**
-    * **Manufactura Aditiva Avanzada:** Todo el conjunto del mecanismo diferencial ha sido fabricado mediante impresión 3D utilizando filamento **PETG**. Se seleccionó este material debido a su alta resistencia al impacto, durabilidad mecánica superior frente al PLA y una excelente flexibilidad estructural que evita fracturas por fatiga en los engranajes.
-    * **Integración de Rodamientos:** Para soportar el movimiento del diferencial, se integraron rodamientos de bolas de alta precisión. Esto es fundamental para evitar por completo atascos mecánicos en la piñonería, reducir la fricción interna a niveles mínimos y permitir un giro mucho más suave y eficiente del eje.
-    * **Dinámica de Giro (Evitar Derrapes):** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
-    * **Preservación de la Odometría:** Al permitir que las ruedas giren a velocidades distintas de forma natural, las lecturas del encoder reflejan con mayor precisión el desplazamiento real del centro de masa del robot.
-
+    * **Impreso en 3D:** Todo el conjunto del mecanismo diferencial ha sido fabricado mediante impresión 3D utilizando filamento **PETG**. Se seleccionó este material debido a su alta resistencia al impacto, durabilidad mecánica superior frente al PLA y una excelente flexibilidad estructural que evita fracturas por fatiga en los engranajes.
+    * **Rodamientos:** Para soportar el movimiento del diferencial, se integraron rodamientos de bolas de alta precisión. Esto es fundamental para evitar por completo atascos mecánicos en la piñonería, reducir la fricción interna a niveles mínimos y permitir un giro mucho más suave y eficiente del eje.
+    * **Evitar derrapes:** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
 
 ## 3. Sistema de Dirección (Tren Delantero)
 En el direccionamiento autónomo, la precisión es vital para que el robot no se desvíe de los ángulos deseados y mantenga trayectorias repetibles.
@@ -185,8 +183,8 @@ El control angular de las ruedas delanteras se realiza mediante un servomotor de
 </table>
 
 * **Motivos de Selección:**
-    * **Control de Posición Absoluto:** A diferencia de un motor DC común, el servomotor permite definir un ángulo exacto (por ejemplo, 95° para ir recto, 115° para girar a la derecha) mediante señales PWM, eliminando la necesidad de sensores de fin de carrera o calibraciones complejas al inicio de la ronda.
-    * **Transmisión de Engranajes Metálicos (Robustez Térmica y Mecánica):** Se seleccionó específicamente un servomotor con piñonería metálica en lugar de uno con engranajes de plástico. En pruebas previas, los componentes de plástico experimentaban un desgaste excesivo debido al estrés mecánico, lo que provocaba un aumento crítico en la temperatura del actuador y fallos por rotura de dientes. Los engranajes metálicos ofrecen la tolerancia al torque y la disipación térmica necesarias para soportar las exigencias.
+    * **Control de Posición preciso:** A diferencia de un motor DC común, el servomotor permite definir un ángulo exacto.
+    * **Tipo de servomotor:** Se seleccionó específicamente un servomotor con piñonería metálica en lugar de uno con engranajes de plástico. En pruebas previas, los componentes de plástico experimentaban un desgaste excesivo debido al estrés mecánico, lo que provocaba un aumento crítico en la temperatura del actuador y fallos por rotura de dientes. Los engranajes metálicos ofrecen la tolerancia al torque y la disipación térmica necesarias para soportar las exigencias.
 
 ### 3.2. Geometría de Dirección (Principio de Ackerman)
 El varillaje mecánico de la dirección delantera está diseñado siguiendo geométricamente el principio de **Ackerman**.
@@ -196,10 +194,8 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 </p>
 
 * **Justificación Técnica y Componentes:**
-    * **Estructura Íntegramente Impresa en 3D:** Al igual que el tren trasero, el sistema de varillaje y las manguetas de la dirección están fabricados en su totalidad mediante impresión 3D en **PETG**, garantizando ligereza mecánica sin sacrificar rigidez ante los giros bruscos del servomotor.
-    * **Rodamientos en Ruedas Delanteras:** Para maximizar la fluidez del movimiento dinámico, se incorporaron rodamientos en ambas ruedas delanteras de manera independiente. Esto disminuye drásticamente el coeficiente de fricción al rodar, asegurando que las llantas delanteras giren mucho mejor y respondan de forma inmediata a los cambios de dirección impuestos por el algoritmo de navegación.
-    * **Principio Cinemático:** Este sistema asegura que, al girar, la rueda delantera interna rote un ángulo ligeramente mayor que la rueda delantera externa. Esto se debe a que ambas ruedas deben pivotar respecto al mismo centro de rotación instantáneo (compartido con el eje trasero). 
-    * **Reducción del Deslizamiento:** Al implementar Ackerman, se reduce casi a cero el deslizamiento lateral (*slip*) de los neumáticos delanteros, permitiendo giros limpios, predecibles y cerrados en las esquinas del circuito.
+    * **Estructura Impresa en 3D:** Al igual que el tren trasero, las varillas y las manguetas de la dirección están fabricados totalmente mediante impresión 3D en **PETG**.
+    * **Rodamientos en Ruedas Delanteras:** Para mejorar la fluidez del movimiento, se incorporaron rodamientos en ambas ruedas delanteras. Esto disminuye la fricción al rodar, asegurando que las llantas delanteras giren mucho mejor y respondan mejor a los cambios de dirección.
 
 ## 4. Matriz de Justificación de Componentes (Resumen para Jueces)
 
