@@ -149,7 +149,7 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
 La potencia del motor no va directo a las ruedas; pasa a través de una etapa de reducción y se distribuye mediante un diferencial mecánico.
 
 <p align="center">
-<img width="600" alt="WhatsApp Image 2026-06-25 at 2 18 30 PM" src="https://github.com/user-attachments/assets/7ccc4d4e-c101-4fce-bc00-fd147a64d0a5" />
+<img width="1280" alt="vehicle-front" src="https://github.com/user-attachments/assets/38d71b13-060d-472b-8ce9-e2b03e79cb97" />
 </p>
 
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
