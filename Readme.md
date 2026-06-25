@@ -1,2 +1,2 @@
-<h1>Born To Win</h1>
+<span style="font-size: 2em; font-weight: bold; display: block;">Born To Win</span>
 <h2>WRO Future Ingeneers</h2>
