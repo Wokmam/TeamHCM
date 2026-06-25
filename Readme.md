@@ -115,7 +115,7 @@ El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada
 
 ## 2. Sistema de Tracción (Tren Trasero)
 
-El tren trasero es el encargado de proveer el par motor y la velocidad necesarios para el desplazamiento del vehículo. Está compuesto por un motor principal y un mecanismo diferencial.
+El tren trasero es el encargado de proveer el torque y velocidad necesarios para el desplazamiento del vehículo. Está compuesto por un motor principal y un mecanismo diferencial.
 
 ### 2.1. Actuador Principal: Motor DC con Encoder (600 RPM)
 Para la propulsión se seleccionó un motor de corriente continua (DC) equipado con un encoder de cuadratura.
