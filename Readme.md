@@ -50,9 +50,9 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     </tr>
     <tr>
       <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">MPU6050</td>
+      <td align="left" valign="middle">Servo Motor</td>
       <td align="center">
-        <img width="577" height="433" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/85fb2310-4ff0-4bd1-a56f-6e161a458451" />
+        <img width="300" height="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
       </td>
     </tr>
     <tr>
