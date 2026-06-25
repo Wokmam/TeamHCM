@@ -131,11 +131,9 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones:</h3>
       <ul>
-        <li><strong>Voltaje de operación:</strong> 5V</li>
-        <li><strong>Rango de medición:</strong> 2 cm a 400 cm</li>
-        <li><strong>Precisión:</strong> ±3 mm</li>
-        <li><strong>Ángulo de apertura:</strong> Menor a 15°</li>
-        <li><strong>Corriente de trabajo:</strong> 15 mA</li>
+        <li><strong>Voltaje de Nominal:</strong> 12V</li>
+        <li><strong>Velocidad:</strong> 600 RPM</li>
+        <li><strong>Tipo de Encoder:</strong> Encoder de cuadratura (Efecto Hall) de fase A y B con 120 PPR en el eje de salida</li>
       </ul>
     </td>
   </tr>
