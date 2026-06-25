@@ -95,3 +95,77 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     </td>
   </tr>
 </table>
+
+
+
+
+
+
+
+
+
+# 🏎️ Sistema de Movilidad y Tracción
+
+Este módulo describe la arquitectura de locomoción del vehículo, detallando la implementación de la tracción trasera con diferencial y el sistema de dirección delantera Ackerman, así como los criterios de ingeniería utilizados para la selección de cada componente.
+
+---
+
+## 1. Arquitectura General del Sistema
+El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada con un sistema de **Dirección Delantera**. Esta disposición emula el comportamiento de un automóvil real, optimizando la estabilidad en línea recta y permitiendo una distribución de peso idónea para las curvas exigentes de la competencia.
+
+---
+
+## 2. Sistema de Tracción (Tren Trasero)
+
+El tren trasero es el encargado de proveer el par motor y la velocidad necesarios para el desplazamiento del vehículo. Está compuesto por un motor principal, un sistema de transmisión por engranajes y un mecanismo diferencial.
+
+### 2.1. Actuador Principal: Motor DC con Encoder (600 RPM)
+Para la propulsión se seleccionó un motor de corriente continua (DC) equipado con un encoder de cuadratura.
+
+* **Especificaciones Clave:**
+    * **Velocidad nominal:** 600 RPM (a voltaje nominal).
+    * **Tipo de sensor:** Encoder de cuadratura (Efecto Hall).
+* **Motivos de Selección:**
+    * **Relación Velocidad/Torque Balanceada:** Las 600 RPM ofrecen una velocidad lineal máxima competitiva para el circuito de la WRO, manteniendo el torque suficiente para superar la inercia inicial sin saturar el consumo eléctrico.
+    * **Control de Lazo Cerrado (Encoder):** El encoder es crítico para medir las RPM reales de las ruedas en tiempo real. Esto permite implementar un algoritmo de control **PID (Proporcional-Integral-Derivativo)** en el firmware, garantizando que el vehículo mantenga una velocidad constante independientemente del estado de la batería o de las rampas/fricción de la pista.
+
+### 2.2. Caja de Engranajes y Sistema Diferencial
+La potencia del motor no va directo a las ruedas; pasa a través de una etapa de reducción y se distribuye mediante un diferencial mecánico.
+
+* **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
+* **Motivos de Selección e Implementación:**
+    * **Dinámica de Giro (Evitar Derrapes):** En las curvas de la WRO, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial (eje rígido), una de las ruedas se vería obligada a patinar, provocando pérdida de tracción, un aumento drástico en el consumo de corriente y descalibración de la odometría basada en el encoder.
+    * **Preservación de la Odometría:** Al permitir que las ruedas giren a velocidades distintas de forma natural, las lecturas del encoder (si está posicionado antes del diferencial o promediando ambas ruedas) reflejan con mayor precisión el desplazamiento real del centro de masa del robot.
+    * **Caja de Engranajes (Gearbox):** Ajusta la relación de transmisión final para adaptar las 600 RPM del motor al diámetro específico de nuestras ruedas, asegurando que el motor trabaje en su zona de máxima eficiencia (alrededor del 50-70% de su velocidad de vacío).
+
+---
+
+## 3. Sistema de Dirección (Tren Delantero)
+
+La precisión en el direccionamiento es fundamental para que el robot esquive los obstáculos (pilares verdes y rojos) de forma consistente.
+
+### 3.1. Actuador de Dirección: Servomotor
+El control angular de las ruedas delanteras se realiza mediante un servomotor de alta precisión conectado a una geometría de dirección.
+
+* **Motivos de Selección:**
+    * **Control de Posición Absoluto:** A diferencia de un motor DC común, el servomotor permite definir un ángulo exacto (por ejemplo, 95° para ir recto, 115° para girar a la derecha) mediante señales PWM, eliminando la necesidad de sensores de fin de carrera o calibraciones complejas al inicio de la ronda.
+    * **Torque de Retención:** Cuando el robot avanza a alta velocidad, las irregularidades de la pista o la fricción tienden a desviar las ruedas delanteras. El servomotor posee el torque suficiente para mantener firmemente la posición angular deseada.
+
+### 3.2. Geometría de Dirección (Principio de Ackerman)
+El varillaje mecánico de la dirección delantera está diseñado siguiendo geométricamente el principio de **Ackerman**.
+
+* **Justificación Técnica:**
+    * Este sistema asegura que, al girar, la rueda delantera interna rote un ángulo ligeramente mayor que la rueda delantera externa. Esto se debe a que ambas ruedas deben pivotar respecto al mismo centro de rotación instantáneo (compartido con el eje trasero). 
+    * Al implementar Ackerman, se reduce casi a cero el deslizamiento lateral (*slip*) de los neumáticos delanteros, permitiendo giros limpios, predecibles y cerrados en las esquinas del circuito.
+
+---
+
+## 4. Matriz de Justificación de Componentes (Resumen para Jueces)
+
+| Componente | Función | Alternativa evaluada | ¿Por qué se eligió? |
+| :--- | :--- | :--- | :--- |
+| **Motor DC 600 RPM** | Propulsión principal | Motor DC de 1000 RPM | El de 1000 RPM sacrificaba demasiado par motor (torque), dificultando las aceleraciones rápidas tras frenar en curvas cerradas. |
+| **Encoder Integrado** | Retroalimentación de velocidad | Sensor óptico en llanta | Mayor resolución por revolución, protegido contra interferencias de luz ambiental de la pista y menor complejidad mecánica. |
+| **Diferencial Mecánico** | Distribución de par en eje trasero | Eje rígido (Spool) | El eje rígido causaba subgiro (*understeer*) severo, haciendo que el robot chocara contra las paredes al intentar giros de 90 grados. |
+| **Servomotor** | Control de dirección | Motor DC + Cremallera | El servomotor simplifica el software gracias a su bucle de control interno de posición y ofrece un retorno exacto al centro (0°). |
+| **Geometría Ackerman** | Mecanismo de dirección | Dirección paralela simple | Evita el arrastre de los neumáticos delanteros, maximizando el agarre y la repetibilidad de las trayectorias autónomas. |
