@@ -1,3 +1,3 @@
-<font size="30">Texto extremadamente grande</font>
-<font size="30">Texto grande para subtítulos</font>
-###HOLA
+<h1>Texto gigante</h1>
+<h2>Texto muy grande</h2>
+<h3>Texto grande</h3>
