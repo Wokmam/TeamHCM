@@ -136,7 +136,7 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
 </table>
 
 * **Motivos de Selección:**
-    * **Cálculo de Odometría Lineal:** El propósito fundamental del encoder es la odometría. Al contar los pulsos generados por las vueltas del motor, el firmware calcula con precisión cuántos centímetros ha avanzado el vehículo en la pista. Esto nos permite programar desplazamientos basados en distancias exactas (por ejemplo: avanzar exactamente 100cm antes de iniciar el giro).
+    * **Cálculo de Odometría:** El propósito fundamental del encoder es la odometría. Al contar los pulsos generados por las vueltas del motor, el firmware calcula con precisión cuántos centímetros ha avanzado el vehículo en la pista. Esto nos permite programar desplazamientos basados en distancias exactas.
 
 ### 2.2. Caja de Engranajes y Sistema Diferencial
 La potencia del motor no va directo a las ruedas; pasa a través de una etapa de reducción y se distribuye mediante un diferencial mecánico.
@@ -147,7 +147,7 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
 * **Motivos de Selección e Implementación:**
-    * **Impreso en 3D:** Todo el conjunto del mecanismo diferencial ha sido fabricado mediante impresión 3D utilizando filamento **PETG**. Se seleccionó este material debido a su alta resistencia al impacto, durabilidad mecánica superior frente al PLA y una excelente flexibilidad estructural que evita fracturas por fatiga en los engranajes.
+    * **Impreso en 3D:** Todo el conjunto del mecanismo diferencial ha sido fabricado mediante impresión 3D utilizando filamento **PETG**. Se seleccionó este material debido a su alta resistencia al impacto y durabilidad superior frente al PLA.
     * **Rodamientos:** Para soportar el movimiento del diferencial, se integraron rodamientos. Estos ayudan a evitar atascos mecánicos, reducir la fricción y permitir un giro mucho más suave y eficiente del eje.
     * **Evitar derrapes:** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
 
