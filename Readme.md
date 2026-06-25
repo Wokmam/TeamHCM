@@ -17,3 +17,6 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       <th align="center">Quantity</th>
       <th align="left">Status</th>
       <th align="center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
