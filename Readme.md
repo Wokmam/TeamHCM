@@ -191,7 +191,7 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
     * **Rodamientos en Ruedas Delanteras:** Para mejorar la fluidez del movimiento, se incorporaron rodamientos en ambas ruedas delanteras. Esto disminuye la fricción al rodar, asegurando que las llantas delanteras giren mucho mejor y respondan mejor a los cambios de dirección.
 
 
-<h2>Lista de Componentes
+<h2>Lista de Componentes<h2>
 <table>
   <thead>
     <tr>
