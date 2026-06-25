@@ -162,6 +162,10 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 La precisión en el direccionamiento es fundamental para que el robot esquive los obstáculos (pilares verdes y rojos) de forma consistente.
 
+<p align="center"
+<img width="1280" height="392" alt="vehicle-front" src="https://github.com/user-attachments/assets/712d6559-9d91-4c77-817c-6fbcf2b87f92" />
+</p>
+  
 ### 3.1. Actuador de Dirección: Servomotor
 El control angular de las ruedas delanteras se realiza mediante un servomotor de alta precisión conectado a una geometría de dirección.
 
