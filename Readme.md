@@ -192,6 +192,7 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 
 
 <h2>Lista de Componentes<h2>
+  
 <table>
   <thead>
     <tr>
