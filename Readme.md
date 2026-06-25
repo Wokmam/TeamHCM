@@ -66,7 +66,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 </table>
 
 
-<h2>Giroscopio MPU6050</h2>
+<h2>GArduino Mega Pro Mini</h2>
 
 <table>
   <tr>    
