@@ -154,11 +154,9 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
     * **Motivos de Selección e Implementación:**
-    * **Dinámica de Giro (Evitar Derrapes):** En las curvas de la WRO, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial (eje rígido), una de las ruedas se vería obligada a patinar, provocando pérdida de tracción, un aumento drástico en el consumo de corriente y descalibración de la odometría basada en el encoder.
-    * **Preservación de la Odometría:** Al permitir que las ruedas giren a velocidades distintas de forma natural, las lecturas del encoder (si está posicionado antes del diferencial o promediando ambas ruedas) reflejan con mayor precisión el desplazamiento real del centro de masa del robot.
-    * **Caja de Engranajes (Gearbox):** Ajusta la relación de transmisión final para adaptar las 600 RPM del motor al diámetro específico de nuestras ruedas, asegurando que el motor trabaje en su zona de máxima eficiencia (alrededor del 50-70% de su velocidad de vacío).
+    * **Dinámica de Giro (Evitar Derrapes):** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
+    * **Preservación de la Odometría:** Al permitir que las ruedas giren a velocidades distintas de forma natural, las lecturas del encoder reflejan con mayor precisión el desplazamiento real del centro de masa del robot.
 
----
 
 ## 3. Sistema de Dirección (Tren Delantero)
 
