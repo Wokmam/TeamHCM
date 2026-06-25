@@ -106,7 +106,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>SG90 Servo Specifications:</h3>
+      <h3>S:</h3>
       <ul>
         <li><strong>Operating Voltage:</strong>Tipo: Digital</li>
         <li><strong>Operating Speed:</strong> 0.12 sec/60° (4.8V)</li>
