@@ -162,9 +162,6 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 La precisión en el direccionamiento es fundamental para que el robot esquive los obstáculos (pilares verdes y rojos) de forma consistente.
 
-<p align="center">
-<img width="800" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
-</p>
   
 ### 3.1. Actuador de Dirección: Servomotor
 El control angular de las ruedas delanteras se realiza mediante un servomotor de alta precisión conectado a una geometría de dirección.
@@ -193,6 +190,10 @@ El control angular de las ruedas delanteras se realiza mediante un servomotor de
 
 ### 3.2. Geometría de Dirección (Principio de Ackerman)
 El varillaje mecánico de la dirección delantera está diseñado siguiendo geométricamente el principio de **Ackerman**.
+
+<p align="center">
+<img width="800" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
+</p>
 
 * **Justificación Técnica:**
     * Este sistema asegura que, al girar, la rueda delantera interna rote un ángulo ligeramente mayor que la rueda delantera externa. Esto se debe a que ambas ruedas deben pivotar respecto al mismo centro de rotación instantáneo (compartido con el eje trasero). 
