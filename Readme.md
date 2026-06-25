@@ -1,2 +1,2 @@
-<h1> Team Born To Win</h1>
-<h2>WRO Future Ingeneers</h2>
+<h1>Born To Win WRO Future Engineers team</h1>
+<h2>World Robot Olympiad (WRO)</h2>
