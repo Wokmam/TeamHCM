@@ -106,14 +106,8 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 
 
 
-# 🏎️ Sistema de Movilidad y Tracción
-
-Este módulo describe la arquitectura de locomoción del vehículo, detallando la implementación de la tracción trasera con diferencial y el sistema de dirección delantera Ackerman, así como los criterios de ingeniería utilizados para la selección de cada componente.
-
----
-
 ## 1. Arquitectura General del Sistema
-El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada con un sistema de **Dirección Delantera**. Esta disposición emula el comportamiento de un automóvil real, optimizando la estabilidad en línea recta y permitiendo una distribución de peso idónea para las curvas.
+El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada con un sistema de **Dirección Delantera**. Esta disposición emula el comportamiento de un automóvil real.
 <p align="center">
 <img width="407" alt="aa" src="https://github.com/user-attachments/assets/1617e8e5-d2b2-4e00-866d-53f5e1a5e37c" />
 </p>
@@ -155,7 +149,7 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
 * **Motivos de Selección e Implementación:**
     * **Impreso en 3D:** Todo el conjunto del mecanismo diferencial ha sido fabricado mediante impresión 3D utilizando filamento **PETG**. Se seleccionó este material debido a su alta resistencia al impacto, durabilidad mecánica superior frente al PLA y una excelente flexibilidad estructural que evita fracturas por fatiga en los engranajes.
-    * **Rodamientos:** Para soportar el movimiento del diferencial, se integraron rodamientos de bolas de alta precisión. Esto es fundamental para evitar por completo atascos mecánicos en la piñonería, reducir la fricción interna a niveles mínimos y permitir un giro mucho más suave y eficiente del eje.
+    * **Rodamientos:** Para soportar el movimiento del diferencial, se integraron rodamientos. Estos ayudan a evitar atascos mecánicos, reducir la fricción y permitir un giro mucho más suave y eficiente del eje.
     * **Evitar derrapes:** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
 
 ## 3. Sistema de Dirección (Tren Delantero)
