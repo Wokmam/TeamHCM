@@ -9,62 +9,6 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 
 
 
-<h2>Lista de componentes</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th align="center">Quantity</th>
-      <th align="left">Status</th>
-      <th align="center">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Arduino Mega Pro Mini</td>
-      <td align="center">
-        <img width="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
-      </td>
-    </tr>
-    <tr>
-      <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">MPU6050</td>
-      <td align="center">
-        <img width="577"alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/85fb2310-4ff0-4bd1-a56f-6e161a458451" />
-      </td>
-    </tr>
-    <tr>
-      <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Puente H TB6612FNG</td>
-      <td align="center">
-        <img width="500" alt="800x800-removebg-preview" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
-      </td>
-    </tr>
-    <tr>
-      <td align="center" valign="middle">3</td>
-      <td align="left" valign="middle">Sensor Ultrasonido HC-SR04</td>
-      <td align="center">
-        <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
-      </td>
-    </tr>
-    <tr>
-      <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Servo Motor</td>
-      <td align="center">
-        <img width="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
-      </td>
-    </tr>
-    <tr>
-      <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Motor DC 600rpm con Encoder Rotativo</td>
-      <td align="center">
-        <img width="500" alt="800x800-removebg-preview" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 
 <h3>Arduino Mega Pro Mini</h3>
 
