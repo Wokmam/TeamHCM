@@ -52,7 +52,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       <td align="center" valign="middle">1</td>
       <td align="left" valign="middle">Servo Motor</td>
       <td align="center">
-        <img width="300"alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
+        <img width="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
       </td>
     </tr>
     <tr>
