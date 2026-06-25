@@ -138,10 +138,6 @@ Para la propulsión se seleccionó un motor de corriente continua (DC) equipado 
     </td>
   </tr>
 </table>
-
-* **Especificaciones Clave:**
-    * **Velocidad:** 600 RPM .
-    * **Tipo de sensor:** Encoder de cuadratura (Efecto Hall).
 * **Motivos de Selección:**
     * **Relación Velocidad/Torque Balanceada:** El motor ofrece una velocidad de 600rpm, manteniendo el torque suficiente para superar la inercia inicial sin saturar el consumo eléctrico.
     * **Cálculo de Odometría Lineal:** El propósito fundamental del encoder es la odometría. Al contar los pulsos generados por las vueltas del motor, el firmware calcula con precisión cuántos centímetros ha avanzado el vehículo en la pista. Esto nos permite programar desplazamientos basados en distancias exactas (por ejemplo: avanzar exactamente 100cm antes de iniciar el giro).
