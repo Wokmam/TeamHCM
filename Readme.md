@@ -67,28 +67,13 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 
 
 
-
 <table>
-  <tr>
+  <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img width="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
+    <img width="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Specifications:</h3>
-      <ul>
-        <li><strong>Voltage:</strong> 6V</li>
-        <li><strong>No-load Speed:</strong> 500RPM</li>
-        <li><strong>Stall Torque:</strong> 0.15kg-cm</li>
-        <li><strong>Current:</strong> 0.023A</li>
-        <li><strong>Gear Ratio:</strong> 1:100</li>
-      </ul>
-    </td>
-      <tr>
-    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img width="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
-    </td>
-    <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Specifications:</h3>
+      <h3>N20 Motor Specifications:</h3>
       <ul>
         <li><strong>Voltage:</strong> 6V</li>
         <li><strong>No-load Speed:</strong> 500RPM</li>
@@ -98,5 +83,20 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       </ul>
     </td>
   </tr>
+  
+  <tr>    
+    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
+      <img width="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
+    </td>
+    <td width="60%" valign="middle" bgcolor="#0d1117">
+      <h3>SG90 Servo Specifications:</h3>
+      <ul>
+        <li><strong>Operating Voltage:</strong> 4.8V - 6.0V</li>
+        <li><strong>Operating Speed:</strong> 0.12 sec/60° (4.8V)</li>
+        <li><strong>Stall Torque:</strong> 1.8 kg-cm (4.8V)</li>
+        <li><strong>Dead Band Width:</strong> 5 µs</li>
+        <li><strong>Operating Angle:</strong> 180°</li>
+      </ul>
+    </td>
+  </tr>
 </table>
-
