@@ -159,9 +159,7 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 
 
 ## 3. Sistema de Dirección (Tren Delantero)
-
-La precisión en el direccionamiento es fundamental para que el robot esquive los obstáculos (pilares verdes y rojos) de forma consistente.
-
+En el direccionamiento autónomo, la precisión es vital para que el robot no se desvíe de los ángulos deseados y mantenga trayectorias repetibles.
   
 ### 3.1. Actuador de Dirección: Servomotor
 El control angular de las ruedas delanteras se realiza mediante un servomotor de alta precisión conectado a una geometría de dirección.
