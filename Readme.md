@@ -1,5 +1,2 @@
-<h1>Bor To Win
-WRO Future Ingeneers</h1>
-<h2>aa</h2>
-
-### aa
+<p style="font-size: 45px; font-weight: bold; margin-bottom: 5px;">Bor To Win</p>
+<p style="font-size: 30px; font-weight: bold; margin-top: 0;">WRO Future Engineers</p>
