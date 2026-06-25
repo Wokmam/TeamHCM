@@ -34,5 +34,12 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
         <img width="577" height="433" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/85fb2310-4ff0-4bd1-a56f-6e161a458451" />
       </td>
     </tr>
+    <tr>
+      <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">Puente H TB6612FNG</td>
+      <td align="center">
+        <img width="500" height="500" alt="800x800-removebg-preview" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
+      </td>
+    </tr>
   </tbody>
 </table>
