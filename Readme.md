@@ -1,2 +1,2 @@
-<h1>Bor To Win</h1>
+<h1>**Bor To Win**</h1>
 <h2>WRO Future Ingeneers</h2>
