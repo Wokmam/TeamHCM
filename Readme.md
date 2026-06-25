@@ -187,33 +187,6 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 | **Servomotor** | Control de dirección | Motor DC + Cremallera | El servomotor simplifica el software gracias a su bucle de control interno de posición y ofrece un retorno exacto al centro (0°). |
 | **Geometría Ackerman** | Mecanismo de dirección | Dirección paralela simple | Evita el arrastre de los neumáticos delanteros, maximizando el agarre y la repetibilidad de las trayectorias autónomas. |
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <table>
   <thead>
     <tr>
@@ -227,7 +200,7 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
       <td align="center" valign="middle">1</td>
       <td align="left" valign="middle">Raspberry Pi 4 Model B</td>
       <td align="center">
-        <img width="250" alt="Raspberry Pi 4" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
+        <img width="500" height="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/066d5348-7654-476c-9065-e70d8045de8d" />
       </td>
     </tr>
     <tr>
