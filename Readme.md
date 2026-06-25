@@ -108,7 +108,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <img width="500" alt="800x800-removebg-preview" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones del Controlador TB6612FNG:</h3>
+      <h3>Especificaciones</h3>
       <ul>
         <li><strong>Voltaje de motores (VM):</strong> 2.5V - 13.5V</li>
         <li><strong>Voltaje lógico (VCC):</strong> 2.7V - 5.5V</li>
@@ -124,7 +124,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     <img width="577" height="433" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/c63aba94-bd8b-454a-886a-e9268a2cf3c5" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones del Giroscopio/Acelerómetro MPU6050:</h3>
+      <h3>Especificaciones:</h3>
       <ul>
         <li><strong>Voltaje de operación:</strong> 3.3V - 5.0V</li>
         <li><strong>Grados de libertad:</strong> 6 ejes (3 ejes acelerómetro, 3 ejes giroscopio)</li>
@@ -140,7 +140,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones del Sensor Ultrasonido HC-SR04:</h3>
+      <h3>Especificaciones:</h3>
       <ul>
         <li><strong>Voltaje de operación:</strong> 5V</li>
         <li><strong>Rango de medición:</strong> 2 cm a 400 cm</li>
