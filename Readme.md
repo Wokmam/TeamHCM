@@ -152,7 +152,7 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
     * **Evitar derrapes:** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
 
 ## 3. Sistema de Dirección (Tren Delantero)
-En el direccionamiento autónomo, la precisión es vital para que el robot no se desvíe de los ángulos deseados y mantenga trayectorias repetibles.
+En parte de dirección, la precisión es vital para que el robot no se desvíe de los ángulos deseados y mantenga trayectorias repetibles.
   
 ### 3.1. Actuador de Dirección: Servomotor
 El control angular de las ruedas delanteras se realiza mediante un servomotor de alta precisión conectado a una geometría de dirección.
