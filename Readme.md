@@ -172,14 +172,16 @@ El control angular de las ruedas delanteras se realiza mediante un servomotor de
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
+    <img width="250" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones:</h3>
       <ul>
-        <li><strong>Voltaje de Nominal:</strong> 12V</li>
-        <li><strong>Velocidad:</strong> 600 RPM</li>
-        <li><strong>Tipo de Encoder:</strong> Encoder de cuadratura (Efecto Hall) de fase A y B con 120 PPR en el eje de salida</li>
+        <li><strong>Tipo:</strong> Digital</li>
+        <li><strong>Velocidad:</strong> 0.12 sec/60° (4.8V)</li>
+        <li><strong>Torque:</strong> 1.8 kg-cm (4.8V)</li>
+        <li><strong>Voltaje:</strong> 5V</li>
+        <li><strong>Rango de Operación:</strong> 0°-180°</li>
       </ul>
     </td>
   </tr>
