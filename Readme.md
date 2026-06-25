@@ -101,18 +101,52 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     </td>
   </tr>
 
-  <tr>    
+
+
+ <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
+      <img src="URL_DE_TU_IMAGEN_TB6612FNG.png" alt="Puente H TB6612FNG" width="100%" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones:</h3>
+      <h3>Especificaciones del Controlador TB6612FNG:</h3>
       <ul>
-        <li><strong>Operating Voltage:</strong>Tipo: Digital</li>
-        <li><strong>Operating Speed:</strong> 0.12 sec/60° (4.8V)</li>
-        <li><strong>Stall Torque:</strong> 1.8 kg-cm (4.8V)</li>
-        <li><strong>Dead Band Width:</strong> 5 µs</li>
-        <li><strong>Operating Angle:</strong> 180°</li>
+        <li><strong>Voltaje de motores (VM):</strong> 2.5V - 13.5V</li>
+        <li><strong>Voltaje lógico (VCC):</strong> 2.7V - 5.5V</li>
+        <li><strong>Corriente de salida:</strong> 1.2A continuos (3.2A pico por canal)</li>
+        <li><strong>Canales:</strong> Controla hasta 2 motores de DC o 1 motor paso a paso</li>
+        <li><strong>Protecciones:</strong> Térmica integrada y detección de bajo voltaje</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>    
+    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
+      <img src="URL_DE_TU_IMAGEN_MPU6050.png" alt="Giroscopio MPU6050" width="100%" />
+    </td>
+    <td width="60%" valign="middle" bgcolor="#0d1117">
+      <h3>Especificaciones del Giroscopio/Acelerómetro MPU6050:</h3>
+      <ul>
+        <li><strong>Voltaje de operación:</strong> 3.3V - 5.0V</li>
+        <li><strong>Grados de libertad:</strong> 6 ejes (3 ejes acelerómetro, 3 ejes giroscopio)</li>
+        <li><strong>Rango del giroscopio:</strong> ±250, ±500, ±1000, ±2000 °/seg</li>
+        <li><strong>Rango del acelerómetro:</strong> ±2g, ±4g, ±8g, ±16g</li>
+        <li><strong>Protocolo de comunicación:</strong> I2C</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>    
+    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
+      <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
+    </td>
+    <td width="60%" valign="middle" bgcolor="#0d1117">
+      <h3>Especificaciones del Sensor Ultrasonido HC-SR04:</h3>
+      <ul>
+        <li><strong>Voltaje de operación:</strong> 5V</li>
+        <li><strong>Rango de medición:</strong> 2 cm a 400 cm</li>
+        <li><strong>Precisión:</strong> ±3 mm</li>
+        <li><strong>Ángulo de apertura:</strong> Menor a 15°</li>
+        <li><strong>Corriente de trabajo:</strong> 15 mA</li>
       </ul>
     </td>
   </tr>
