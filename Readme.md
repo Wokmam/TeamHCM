@@ -1,3 +1,2 @@
-<font size="10"><b>Bor To Win</b></font>
-<font size="20"><b>WRO Future Engineers</b></font>
-<h3>Texto grande</h3>
+<p style="font-size: 2em; margin-bottom: 0;"><b>Bor To Win</b></p>
+<p style="font-size: 1.5em; margin-top: 0;"><b>WRO Future Engineers</b></p>
