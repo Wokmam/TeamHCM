@@ -36,4 +36,3 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
     </tr>
   </tbody>
 </table>
-<img width="500" height="500" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
