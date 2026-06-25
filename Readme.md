@@ -153,7 +153,7 @@ La potencia del motor no va directo a las ruedas; pasa a través de una etapa de
 </p>
 
 * **Mecanismo Diferencial:** Se diseñó e implementó un diferencial de engranajes cónicos en el eje trasero.
-    * **Motivos de Selección e Implementación:**
+* **Motivos de Selección e Implementación:**
     * **Dinámica de Giro (Evitar Derrapes):** En las curvas, la rueda interior recorre una distancia menor que la rueda exterior. Sin un diferencial, una de las ruedas se vería obligada a patinar, provocando pérdida de tracción y descalibración de la odometría basada en el encoder.
     * **Preservación de la Odometría:** Al permitir que las ruedas giren a velocidades distintas de forma natural, las lecturas del encoder reflejan con mayor precisión el desplazamiento real del centro de masa del robot.
 
