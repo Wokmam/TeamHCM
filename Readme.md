@@ -216,7 +216,7 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
   </thead>
   <tbody>
     <tr>
-      <td align="center" valign="middle">1</td>
+      <td align="center" valign="middle">Largo</td>
       <td align="left" valign="middle">19,5cm</td>
       </td>
     </tr>
