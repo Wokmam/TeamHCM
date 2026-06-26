@@ -191,6 +191,16 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
     * **Rodamientos en Ruedas Delanteras:** Para mejorar la fluidez del movimiento, se incorporaron rodamientos en ambas ruedas delanteras. Esto disminuye la fricción al rodar, asegurando que las llantas delanteras giren mucho mejor y respondan mejor a los cambios de dirección.
 
 
+
+
+
+
+
+### 4. Diseño Estructural e Impresión 3D del Chasis
+La plataforma base del robot fue diseñada en Fusion360 completamente a medida y fabricada en su totalidad mediante impresión 3D utilizando filamento PETG. lo que le otorga una alta resistencia a los impactos y la durabilidad.
+
+El diseño en 3D conecta directamente los soportes para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la unión de estos soportes, componentes electrónicos y sensores al chasis se realiza mediante tornillos. Esto asegura una fijación firme que evita vibraciones o desajustes.
+
 <h2>Lista de Componentes<h2>
   
 <table>
