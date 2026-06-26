@@ -203,7 +203,7 @@ El diseño en 3D conecta directamente los soportes impresos en 3D
 para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la unión de estos soportes, componentes electrónicos y sensores al chasis se realiza mediante tornillos. Esto asegura una fijación firme que evita vibraciones o desajustes.
 
 <p align="center">
-<img width="600" alt="vehicle-botton" src="https://github.com/user-attachments/assets/e92f4ab7-8263-4b58-9d08-5a4cb3463061" />
+<img width="500" alt="vehicle-botton" src="https://github.com/user-attachments/assets/e92f4ab7-8263-4b58-9d08-5a4cb3463061" />
 </p>
 
 <h2>Lista de Componentes<h2>
