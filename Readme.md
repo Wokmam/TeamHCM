@@ -211,18 +211,18 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
   <thead>
     <tr>
       <th align="center">Dimensión</th>
-      <th align="left">Valor (cm)</th>
+      <th align="left">Valor (CM)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td align="center" valign="middle">Largo</td>
-      <td align="left" valign="middle">19,5cm</td>
+      <td align="left" valign="middle">19,5</td>
       </td>
     </tr>
     <tr>
       <td align="center" valign="middle">Ancho</td>
-      <td align="left" valign="middle">10cm</td>
+      <td align="left" valign="middle">10</td>
       </td>
     </tr>
 
