@@ -186,7 +186,7 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 <img width="800" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
 </p>
 
-* **Justificación Técnica y Componentes:**
+* **Justificación Técnica:**
     * **Estructura Impresa en 3D:** Al igual que el tren trasero, las varillas y las manguetas de la dirección están fabricados totalmente mediante impresión 3D en **PETG**.
     * **Rodamientos en Ruedas Delanteras:** Para mejorar la fluidez del movimiento, se incorporaron rodamientos en ambas ruedas delanteras. Esto disminuye la fricción al rodar, asegurando que las llantas delanteras giren mucho mejor y respondan mejor a los cambios de dirección.
 
