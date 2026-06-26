@@ -228,7 +228,7 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
       <td align="center" valign="middle">1</td>
       <td align="left" valign="middle">MPU6050</td>
       <td align="center">
-        <img width="220" alt="MPU6050" src="https://github.com/user-attachments/assets/85fb2310-4ff0-4bd1-a56f-6e161a458451" />
+        <img width="300" alt="MPU6050" src="https://github.com/user-attachments/assets/85fb2310-4ff0-4bd1-a56f-6e161a458451" />
       </td>
     </tr>
     <tr>
