@@ -219,7 +219,7 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
   <tbody>
     <tr>
       <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">Raspberry Pi 4 Model B</td>
+      <td align="left" valign="middle">Arduino Mega Pro Mini</td>
       <td align="center">
         <img width="350" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/066d5348-7654-476c-9065-e70d8045de8d" />
       </td>
