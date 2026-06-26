@@ -197,10 +197,12 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 
 
 ### 4. Diseño Estructural e Impresión 3D del Chasis
-La plataforma base del robot fue diseñada en Fusion360 completamente a medida y fabricada en su totalidad mediante impresión 3D utilizando filamento PETG. lo que le otorga una alta resistencia a los impactos y la durabilidad.
+La plataforma base del robot fue diseñada en Fusion360 completamente a medida y fabricada en su totalidad mediante impresión 3D utilizando filamento PETG. lo que le otorga una alta resistencia a los impactos y durabilidad.
 
-El diseño en 3D conecta directamente los soportes para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la unión de estos soportes, componentes electrónicos y sensores al chasis se realiza mediante tornillos. Esto asegura una fijación firme que evita vibraciones o desajustes.
+El diseño en 3D conecta directamente los soportes impresos en 3D 
+para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la unión de estos soportes, componentes electrónicos y sensores al chasis se realiza mediante tornillos. Esto asegura una fijación firme que evita vibraciones o desajustes.
 
+<img width="1280" height="960" alt="vehicle-botton" src="https://github.com/user-attachments/assets/e92f4ab7-8263-4b58-9d08-5a4cb3463061" />
 <h2>Lista de Componentes<h2>
   
 <table>
