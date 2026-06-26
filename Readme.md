@@ -220,6 +220,12 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
       <td align="left" valign="middle">19,5cm</td>
       </td>
     </tr>
+    <tr>
+      <td align="center" valign="middle">Ancho</td>
+      <td align="left" valign="middle">10cm</td>
+      </td>
+    </tr>
+
 
 <h2>Lista de Componentes</h2>
 
