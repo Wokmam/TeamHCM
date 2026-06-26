@@ -224,7 +224,8 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
       <td align="left" valign="middle">10</td>
       </td>
     </tr>
-
+  </tbody>
+</table>
 
 <h2>Lista de Componentes</h2>
 
