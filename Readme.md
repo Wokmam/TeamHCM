@@ -221,7 +221,7 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
     </tr>
     <tr>
       <td align="center" valign="middle">Ancho</td>
-      <td align="left" valign="middle">10</td>
+      <td align="left" valign="middle">Eu mato vc seu fildo da puta</td>
       </td>
     </tr>
     <tr>
