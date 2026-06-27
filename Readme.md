@@ -227,6 +227,22 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
   </tbody>
 </table>
 
+
+## 5. Sistema Electrónico y Sensores
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h2>Lista de Componentes</h2>
 
   
