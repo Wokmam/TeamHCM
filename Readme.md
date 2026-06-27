@@ -236,7 +236,7 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
 ## 5. Sistema Electrónico y Sensores
 
 
-<p aling="center">
+<p align="center">
 <img width="600" alt="Gemini_Generated_Image_czb582czb582czb5" src="https://github.com/user-attachments/assets/656e8cc0-6125-4428-8801-4a95f854b14d" />
 </p>
 
