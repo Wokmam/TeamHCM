@@ -232,8 +232,9 @@ Este apartado abarca la arquitectura electrónica del vehículo y los componente
 Como placa de desarrollo seleccionamos el Arduino Mega Pro Mini, que se encarga de la lectura de sensores y la genereación de señales para los actuadores.
 
 <p align="center">
-<img width="600" alt="Gemini_Generated_Image_czb582czb582czb5" src="https://github.com/user-attachments/assets/656e8cc0-6125-4428-8801-4a95f854b14d" />
+<img width="1455"alt="Esquema_conexiones" src="https://github.com/user-attachments/assets/79023e7e-85ce-4851-983c-809d8b3baa96" />
 </p>
+
 
 Se seleccionó esta variante específica debido a su de forma sumamente reducida en comparación con el Arduino Mega convencional, lo que permite integrarlo de manera eficiente en el chasis sin comprometer espacio ni añadir peso innecesario. A pesar de su tamaño compacto, conserva la totalidad de pines digitales y analógicos del microcontrolador ATmega2560, ofreciendo la conectividad necesaria para gestionar múltiples sensores y actuadores de forma simultánea. Asimismo, su diseño plano facilita soldarle pines header macho para conectarlo a pines header hembra conectaods en nuestra PCB personalizada, eliminando el uso de cables propensos a falsos contactos por las vibraciones del coche. Todo esto se complementa con una excelente relación costo-beneficio, asegurando un hardware potente, fiable y económico para el desarrollo del proyecto.
 
@@ -255,12 +256,12 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
   </tr>
 </table>
 
+
+
+
 <p align="center">
-<img width="1455"alt="Esquema_conexiones" src="https://github.com/user-attachments/assets/79023e7e-85ce-4851-983c-809d8b3baa96" />
+<img width="600" alt="Gemini_Generated_Image_czb582czb582czb5" src="https://github.com/user-attachments/assets/656e8cc0-6125-4428-8801-4a95f854b14d" />
 </p>
-
-
-
 
 
 
