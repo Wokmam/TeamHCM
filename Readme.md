@@ -234,7 +234,9 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
 
 
 ## 5. Sistema Electrónico y Sensores
+Este apartado abarca la arquitectura electrónica del vehículo y los componentes seleccionados para la gestión de tareas y percepción del entorno.
 
+## Unidad de Procesamiento: Arduino Mega Pro Mini
 <p align="center">
 <img width="1455"alt="Esquema_conexiones" src="https://github.com/user-attachments/assets/79023e7e-85ce-4851-983c-809d8b3baa96" />
 </p>
