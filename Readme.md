@@ -272,6 +272,40 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
 
 
 
+
+
+
+
+
+
+
+
+<table align="center" width="100%">
+  <tr>
+    <td width="50%" align="center" valign="top" bgcolor="#0d1117">
+      <br>
+      <h3>🔗 Open Challenge</h3>
+      <a href="https://youtu.be/Df2YxnnMeV0">
+        <img width="100%" alt="Open Challenge Round" src="URL_DE_LA_MINIATURA_O_IMAGEN_1" />
+      </a>
+      <br><br>
+      <a href="URL_DE_TU_VIDEO_YOUTUBE_1">Watch Open Challenge Round</a>
+      <br><br>
+      <p><i>Autonomous navigation using IMU and distance sensors for lap completion and precision parking</i></p>
+    </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h2>Lista de Componentes</h2>
 
   
