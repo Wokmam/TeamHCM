@@ -257,9 +257,9 @@ En la arquitectura de nuestro sistema, el Arduino Mega Pro Mini funciona como el
   </tr>
 </table>
 
+<hr style="border: none; border-top: 5px solid #30363d; margin: 20px 0;">
 
-
-## Sensores de Distancia: Ultrasonidos HC-SR04
+## 5.2. Sensores de Distancia: Ultrasonidos HC-SR04
 
 El cálculo de las distancias hacia los límites de la pista se gestiona mediante un conjunto de sensores de ultrasonidos HC-SR04 ubicados de forma estratégica en la parte frontal del coche. Estos componentes operan emitiendo una ráfaga de ondas acústicas de alta frecuencia que viajan por el aire hasta reflejarse en las superficies fijas del entorno y regresar al receptor. A través del tiempo que tarda este eco en retornar, el microcontrolador calcula con gran precisión la distancia en centímetros hacia los muros.
 
@@ -287,7 +287,7 @@ En la lógica de navegación de nuestro coche, el sensor central se encarga de m
   </tr>
 </table>
 
-<hr style="border: none; border-top: 3px solid #30363d; margin: 20px 0;">
+<hr style="border: none; border-top: 5px solid #30363d; margin: 20px 0;">
 
 ## 5.3. Unidad de Medición Inercial (IMU): MPU6050
 La estabilidad angular y la orientación espacial del vehículo están reguladas por la unidad de medición inercial MPU6050. Este dispositivo integra un giroscopio de tres ejes y un acelerómetro de tres ejes en un único chip, permitiendo capturar con precisión los cambios de velocidad y las variaciones en la rotación del coche sobre la pista. La comunicación con el microcontrolador central se realiza de manera eficiente a través del protocolo I2C, lo que asegura una transmisión rápida de los datos inerciales recolectados en tiempo real.
