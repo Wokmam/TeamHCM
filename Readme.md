@@ -292,6 +292,12 @@ En la lógica de navegación de nuestro coche, el sensor central se encarga de m
 ## 5.3. Unidad de Medición Inercial (IMU): MPU6050
 La estabilidad angular y la orientación espacial del vehículo están reguladas por la unidad de medición inercial MPU6050. Este dispositivo integra un giroscopio de tres ejes y un acelerómetro de tres ejes en un único chip, permitiendo capturar con precisión los cambios de velocidad y las variaciones en la rotación del coche sobre la pista. La comunicación con el microcontrolador central se realiza de manera eficiente a través del protocolo I2C, lo que asegura una transmisión rápida de los datos inerciales recolectados en tiempo real.
 
+<p align="center">
+<img width="388" alt="images" src="https://github.com/user-attachments/assets/2137e394-29f6-440f-a4b2-29b5847cf309" />
+</p>
+
+La implementación de la IMU es fundamental para el sistema de navegación del vehículo, ya que cumple la función de corregir las desviaciones en la trayectoria recta. Aunque los encoders del motor miden los centímetros avanzados, factores físicos como el deslizamiento de las llantas o las imperfecciones del suelo pueden hacer que el carro pierda el rumbo. El MPU6050 monitorea constantemente el ángulo de guiñada (*yaw*), detectando cualquier giro involuntario y permitiendo que el firmware realice ajustes inmediatos en el servomotor de dirección para contrarrestar el desvío y mantener al robot alineado perfectamente con la pista.
+
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
@@ -310,11 +316,6 @@ La estabilidad angular y la orientación espacial del vehículo están reguladas
   </tr>
 </table>
 
-<p align="center">
-<img width="388" alt="images" src="https://github.com/user-attachments/assets/2137e394-29f6-440f-a4b2-29b5847cf309" />
-</p>
-
-La implementación de la IMU es fundamental para el sistema de navegación del vehículo, ya que cumple la función de corregir las desviaciones en la trayectoria recta. Aunque los encoders del motor miden los centímetros avanzados, factores físicos como el deslizamiento de las llantas o las imperfecciones del suelo pueden hacer que el carro pierda el rumbo. El MPU6050 monitorea constantemente el ángulo de guiñada (*yaw*), detectando cualquier giro involuntario y permitiendo que el firmware realice ajustes inmediatos en el servomotor de dirección para contrarrestar el desvío y mantener al robot alineado perfectamente con la pista.
 
 
 
