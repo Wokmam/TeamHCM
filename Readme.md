@@ -272,7 +272,7 @@ En la lógica de navegación de nuestro coche, el sensor central se encarga de m
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
+      <img width="350" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones Técnicas:</h3>
