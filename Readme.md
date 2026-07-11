@@ -12,25 +12,7 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 
 
 
-<h3>Arduino Mega Pro Mini</h3>
 
-<table>
-  <tr>    
-    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="250" alt="ard-removebg-preview" src="https://github.com/user-attachments/assets/235a2521-f8ea-4248-92b4-568c62c36d8a" />
-    </td>
-    <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones:</h3>
-      <ul>
-        <li><strong>Microcontrolador:</strong> ATmega2560</li>
-        <li><strong>Consumo mA:</strong> 20mA</li>
-        <li><strong>Entradas Analógicas:</strong> 16</li>
-        <li><strong>Pines Digitales E/S:</strong> 54 (de los cuales 15 son salidas PWM)</li>
-        <li><strong>Voltaje de Operación:</strong> 5V</li>
-      </ul>
-    </td>
-  </tr>
-  
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
     <img width="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
@@ -64,47 +46,6 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
       </ul>
     </td>
   </tr>
-
-  <tr>    
-    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="577" height="433" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/c63aba94-bd8b-454a-886a-e9268a2cf3c5" />
-    </td>
-    <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones:</h3>
-      <ul>
-        <li><strong>Voltaje de operación:</strong> 3.3V - 5.0V</li>
-        <li><strong>Grados de libertad:</strong> 6 ejes (3 ejes acelerómetro, 3 ejes giroscopio)</li>
-        <li><strong>Rango del giroscopio:</strong> ±250, ±500, ±1000, ±2000 °/seg</li>
-        <li><strong>Rango del acelerómetro:</strong> ±2g, ±4g, ±8g, ±16g</li>
-        <li><strong>Protocolo de comunicación:</strong> I2C</li>
-      </ul>
-    </td>
-  </tr>
-
-  <tr>    
-    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img width="251" alt="descarga-removebg-preview (1)" src="https://github.com/user-attachments/assets/576ff9e5-195d-4699-92de-3f11234e40f7" />
-    </td>
-    <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones:</h3>
-      <ul>
-        <li><strong>Voltaje de operación:</strong> 5V</li>
-        <li><strong>Rango de medición:</strong> 2 cm a 400 cm</li>
-        <li><strong>Precisión:</strong> ±3 mm</li>
-        <li><strong>Ángulo de apertura:</strong> Menor a 15°</li>
-        <li><strong>Corriente de trabajo:</strong> 15 mA</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-
-
-
-
-
-
-
-
 
 ## 1. Arquitectura General del Sistema
 El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada con un sistema de **Dirección Delantera**. Esta disposición emula el comportamiento de un automóvil real.
