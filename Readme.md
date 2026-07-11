@@ -280,11 +280,11 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
       <br><br>
       <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">Watch Open Challenge Round</a>
       <br><br>
-      <p><i>Autonomous navigation using IMU and distance sensors for lap completion and precision parking</i></p>
+      <p><i>ap completion and precision parking</i></p>
     </td>
     <td width="50%" align="center" valign="top" bgcolor="#0d1117">
       <br>
-      <h3>🔗 Obstacle Challenge</h3>
+      <h3>🔗 Desafío de Obstaculos</h3>
       <a href="URL_DE_TU_VIDEO_YOUTUBE_2">
         <img width="100%" alt="Obstacle Challenge Round" src="URL_DE_LA_MINIATURA_O_IMAGEN_2" />
       </a>
