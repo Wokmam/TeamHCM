@@ -279,20 +279,35 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
 
 
 
-
 <table align="center" width="100%">
   <tr>
+    <!-- COLUMNA 1: OPEN CHALLENGE -->
     <td width="50%" align="center" valign="top" bgcolor="#0d1117">
       <br>
       <h3>🔗 Open Challenge</h3>
-      <a href="https://youtu.be/Df2YxnnMeV0">
-        <img width="100%" alt="Open Challenge Round" src="URL_DE_LA_MINIATURA_O_IMAGEN_1" />
+      <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">
+        <img width="100%" alt="Open Challenge Round" src="https://img.youtube.com/vi/Df2YxnnMeV0/maxresdefault.jpg" />
       </a>
       <br><br>
-      <a href="URL_DE_TU_VIDEO_YOUTUBE_1">Watch Open Challenge Round</a>
+      <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">Watch Open Challenge Round</a>
       <br><br>
       <p><i>Autonomous navigation using IMU and distance sensors for lap completion and precision parking</i></p>
     </td>
+
+    <!-- COLUMNA 2: OBSTACLE CHALLENGE (Reemplaza con tus datos cuando los tengas) -->
+    <td width="50%" align="center" valign="top" bgcolor="#0d1117">
+      <br>
+      <h3>🔗 Obstacle Challenge</h3>
+      <a href="URL_DE_TU_VIDEO_YOUTUBE_2">
+        <img width="100%" alt="Obstacle Challenge Round" src="URL_DE_LA_MINIATURA_O_IMAGEN_2" />
+      </a>
+      <br><br>
+      <a href="URL_DE_TU_VIDEO_YOUTUBE_2">Watch Obstacle Challenge Round</a>
+      <br><br>
+      <p><i>Vision-based obstacle detection and avoidance with dynamic path planning</i></p>
+    </td>
+  </tr>
+</table>
 
 
 
