@@ -332,18 +332,18 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
         <img width="100%" alt="Open Challenge Roun" src="https://img.youtube.com/vi/Df2YxnnMeV0/maxresdefault.jpg" />
       </a>
       <br><br>
-      <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">Watch Open Challenge Round</a>
+      <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">Ver Ronde de Desafío Abierta</a>
       <br><br>
       <p><i>Navegación autónoma mediante IMU y sensores de distancia para completar vueltas y estacionamiento de de forma precisa</i></p>
     </td>
     <td width="50%" align="center" valign="top" bgcolor="#0d1117">
       <br>
       <h3>🔗 Desafío de Obstaculos</h3>
-      <a href="URL_DE_TU_VIDEO_YOUTUBE_2">
-        <img width="100%" alt="Obstacle Challenge Round" src="URL_DE_LA_MINIATURA_O_IMAGEN_2" />
+      <a href="URL">
+        <img width="100%" alt="Obstacle Challenge Round" src="URL" />
       </a>
       <br><br>
-      <a href="URL_DE_TU_VIDEO_YOUTUBE_2">Watch Obstacle Challenge Round</a>
+      <a href="URL">Ronda de Desafío Cerrada</a>
       <br><br>
       <p><i>Cumbia</i></p>
     </td>
