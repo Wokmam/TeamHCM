@@ -320,7 +320,7 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
 
 
 
-<h2>Desafíos de la Competencia<h2>
+<h2>🎯 Desafíos de la Competencia</h2>
 <table align="center" width="100%">
   <tr>
     <td width="50%" align="center" valign="top" bgcolor="#0d1117">
