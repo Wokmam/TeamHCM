@@ -295,7 +295,7 @@ La estabilidad angular y la orientación espacial del vehículo están reguladas
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img width="577" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/c63aba94-bd8b-454a-886a-e9268a2cf3c5" />
+      <img width="450" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/c63aba94-bd8b-454a-886a-e9268a2cf3c5" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones Técnicas:</h3>
@@ -309,6 +309,10 @@ La estabilidad angular y la orientación espacial del vehículo están reguladas
     </td>
   </tr>
 </table>
+
+<p align="center">
+<img width="388" alt="images" src="https://github.com/user-attachments/assets/2137e394-29f6-440f-a4b2-29b5847cf309" />
+</p>
 
 La implementación de la IMU es fundamental para el sistema de navegación del vehículo, ya que cumple la función de corregir las desviaciones en la trayectoria recta. Aunque los encoders del motor miden los centímetros avanzados, factores físicos como el deslizamiento de las llantas o las imperfecciones del suelo pueden hacer que el carro pierda el rumbo. El MPU6050 monitorea constantemente el ángulo de guiñada (*yaw*), detectando cualquier giro involuntario y permitiendo que el firmware realice ajustes inmediatos en el servomotor de dirección para contrarrestar el desvío y mantener al robot alineado perfectamente con la pista.
 
