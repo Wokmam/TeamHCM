@@ -295,7 +295,7 @@ La estabilidad angular y la orientación espacial del vehículo están reguladas
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-      <img width="577" height="433" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/c63aba94-bd8b-454a-886a-e9268a2cf3c5" />
+      <img width="577" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/c63aba94-bd8b-454a-886a-e9268a2cf3c5" />
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones Técnicas:</h3>
