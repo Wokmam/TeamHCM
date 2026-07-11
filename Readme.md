@@ -268,17 +268,6 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 <table align="center" width="100%">
   <tr>
     <!-- COLUMNA 1: OPEN CHALLENGE -->
@@ -293,8 +282,6 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
       <br><br>
       <p><i>Autonomous navigation using IMU and distance sensors for lap completion and precision parking</i></p>
     </td>
-
-    <!-- COLUMNA 2: OBSTACLE CHALLENGE (Reemplaza con tus datos cuando los tengas) -->
     <td width="50%" align="center" valign="top" bgcolor="#0d1117">
       <br>
       <h3>🔗 Obstacle Challenge</h3>
