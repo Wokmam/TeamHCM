@@ -237,6 +237,8 @@ Como placa de desarrollo seleccionamos el Arduino Mega Pro Mini, que se encarga 
 
 Se seleccionó esta variante específica debido a su de forma sumamente reducida en comparación con el Arduino Mega convencional, lo que permite integrarlo de manera eficiente en el chasis sin comprometer espacio ni añadir peso innecesario. A pesar de su tamaño compacto, conserva la totalidad de pines digitales y analógicos del microcontrolador ATmega2560, ofreciendo la conectividad necesaria para gestionar múltiples sensores y actuadores de forma simultánea. Asimismo, su diseño plano facilita soldarle pines header macho para conectarlo a pines header hembra conectaods en nuestra PCB personalizada, eliminando el uso de cables propensos a falsos contactos por las vibraciones del coche. Todo esto se complementa con una excelente relación costo-beneficio, asegurando un hardware potente, fiable y económico para el desarrollo del proyecto.
 
+En la arquitectura de nuestro sistema, el Arduino Mega Pro Mini funciona como el cerebro del robot, procesando las entradas del sistema de visión ESP32-CAM, la IMU de 6 ejes MPU-6050 y tres sensores de Ultrasonidos HC-SR04, al tiempo que ejecuta algoritmos y genera salidas de control precisas para el controlador de motor y el ServoMotor.
+
 <table>
   <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
