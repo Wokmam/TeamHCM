@@ -280,7 +280,7 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
       <br><br>
       <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">Watch Open Challenge Round</a>
       <br><br>
-      <p><i>ap completion and precision parking</i></p>
+      <p><i>Navegación autónoma mediante IMU y sensores de distancia para completar vueltas y estacionamiento de de forma precisa</i></p>
     </td>
     <td width="50%" align="center" valign="top" bgcolor="#0d1117">
       <br>
@@ -291,7 +291,7 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
       <br><br>
       <a href="URL_DE_TU_VIDEO_YOUTUBE_2">Watch Obstacle Challenge Round</a>
       <br><br>
-      <p><i>Vision-based obstacle detection and avoidance with dynamic path planning</i></p>
+      <p><i>Cumbia</i></p>
     </td>
   </tr>
 </table>
