@@ -232,6 +232,8 @@ Este apartado abarca la arquitectura electrónica del vehículo y los componente
 <img width="1455"alt="Esquema_conexiones" src="https://github.com/user-attachments/assets/79023e7e-85ce-4851-983c-809d8b3baa96" />
 </p>
 
+<hr style="border: none; border-top: 5px solid #30363d; margin: 20px 0;">
+
 ## Unidad de Procesamiento: Arduino Mega Pro Mini
 Como placa de desarrollo seleccionamos el Arduino Mega Pro Mini, que se encarga de la lectura de sensores y la genereación de señales para los actuadores.
 
