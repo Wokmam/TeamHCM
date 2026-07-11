@@ -287,7 +287,30 @@ En la lógica de navegación de nuestro coche, el sensor central se encarga de m
   </tr>
 </table>
 
+<hr style="border: none; border-top: 3px solid #30363d; margin: 20px 0;">
 
+## 5.3. Unidad de Medición Inercial (IMU): MPU6050
+La estabilidad angular y la orientación espacial del vehículo están reguladas por la unidad de medición inercial MPU6050. Este dispositivo integra un giroscopio de tres ejes y un acelerómetro de tres ejes en un único chip, permitiendo capturar con precisión los cambios de velocidad y las variaciones en la rotación del coche sobre la pista. La comunicación con el microcontrolador central se realiza de manera eficiente a través del protocolo I2C, lo que asegura una transmisión rápida de los datos inerciales recolectados en tiempo real.
+
+<table>
+  <tr>    
+    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
+      <img width="577" height="433" alt="mpu6050_3-axis_acceleration_gyroscope_6dof_module_2-removebg-preview" src="https://github.com/user-attachments/assets/c63aba94-bd8b-454a-886a-e9268a2cf3c5" />
+    </td>
+    <td width="60%" valign="middle" bgcolor="#0d1117">
+      <h3>Especificaciones Técnicas:</h3>
+      <ul>
+        <li><strong>Voltaje de Operación:</strong> 3.3V - 5.0V</li>
+        <li><strong>Grados de Libertad:</strong> 6 ejes (3 ejes acelerómetro, 3 ejes giroscopio)</li>
+        <li><strong>Rango del Giroscopio:</strong> ±250, ±500, ±1000, ±2000 °/seg</li>
+        <li><strong>Rango del Acelerómetro:</strong> ±2g, ±4g, ±8g, ±16g</li>
+        <li><strong>Protocolo de Comunicación:</strong> I2C</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+La implementación de la IMU es fundamental para el sistema de navegación del vehículo, ya que cumple la función de corregir las desviaciones en la trayectoria recta. Aunque los encoders del motor miden los centímetros avanzados, factores físicos como el deslizamiento de las llantas o las imperfecciones del suelo pueden hacer que el carro pierda el rumbo. El MPU6050 monitorea constantemente el ángulo de guiñada (*yaw*), detectando cualquier giro involuntario y permitiendo que el firmware realice ajustes inmediatos en el servomotor de dirección para contrarrestar el desvío y mantener al robot alineado perfectamente con la pista.
 
 
 
