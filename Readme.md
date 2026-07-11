@@ -273,9 +273,9 @@ Se seleccionó esta variante específica debido a su de forma sumamente reducida
     <!-- COLUMNA 1: OPEN CHALLENGE -->
     <td width="50%" align="center" valign="top" bgcolor="#0d1117">
       <br>
-      <h3>🔗 Open Challenge</h3>
+      <h3>🔗 Desafío Abierto</h3>
       <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">
-        <img width="100%" alt="Open Challenge Round" src="https://img.youtube.com/vi/Df2YxnnMeV0/maxresdefault.jpg" />
+        <img width="100%" alt="Open Challenge Roun" src="https://img.youtube.com/vi/Df2YxnnMeV0/maxresdefault.jpg" />
       </a>
       <br><br>
       <a href="https://youtu.be/Df2YxnnMeV0?si=AwDFZAtFiafpjhe3">Watch Open Challenge Round</a>
