@@ -263,6 +263,10 @@ En la arquitectura de nuestro sistema, el Arduino Mega Pro Mini funciona como el
 
 Para la detección de obstáculos y la medición de distancias en tiempo real, el vehículo cuenta con tres sensores ultrasónicos HC-SR04 ubicados estratégicamente en la parte frontal. Estos dispositivos basan su funcionamiento en la emisión de ráfagas de ondas sonoras de alta frecuencia y el cálculo del tiempo de retorno del eco al chocar contra un objeto físico.
 
+<p align="center">
+<img width="600" alt="Gemini_Generated_Image_czb582czb582czb5" src="https://github.com/user-attachments/assets/656e8cc0-6125-4428-8801-4a95f854b14d" />
+</p>
+
 En la lógica de navegación de nuestro coche, el sensor central se encarga de monitorizar de forma constante el espacio libre al frente, lo que resulta crítico para identificar la aproximación hacia los pilares de la pista o paredes frontales. Por su parte, los dos sensores laterales evalúan constantemente la proximidad de los muros izquierdo y derecho. La integración conjunta de estas tres lecturas permite al firmware realizar correcciones de trayectoria inmediatas y evitar colisiones destructivas. Al estar atornillados con firmeza en los soportes dedicados del chasis, se garantiza que los ángulos de apertura inferiores a 15° se mantengan estables y libres de las vibraciones propias del motor, ofreciendo mediciones con una precisión milimétrica dentro de un rango operativo idóneo para el tamaño del circuito.
 
 <table>
@@ -282,9 +286,6 @@ En la lógica de navegación de nuestro coche, el sensor central se encarga de m
     </td>
   </tr>
 </table>
-<p align="center">
-<img width="600" alt="Gemini_Generated_Image_czb582czb582czb5" src="https://github.com/user-attachments/assets/656e8cc0-6125-4428-8801-4a95f854b14d" />
-</p>
 
 
 
