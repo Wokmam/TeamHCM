@@ -33,7 +33,8 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 
  <tr>    
     <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="500" alt="800x800-removebg-preview" src="https://github.com/user-attachments/assets/c52b91e9-2577-4415-aa95-fe3ce67ffa2c" />
+    <img width="500" alt="800x800-removebg-preview" src= /><img width="524" height="586" alt="puente h l290" src="https://github.com/user-attachments/assets/72785d27-0a95-4e2b-9ada-a176bd655cfc" />
+
     </td>
     <td width="60%" valign="middle" bgcolor="#0d1117">
       <h3>Especificaciones</h3>
