@@ -124,7 +124,8 @@ El control angular de las ruedas delanteras se realiza mediante un servomotor de
 El varillaje mecánico de la dirección delantera está diseñado siguiendo geométricamente el principio de **Ackerman**.
 
 <p align="center">
-<img width="800" alt="vehicle-front" src="https://github.com/user-attachments/assets/25f5e535-8113-434c-95e5-6078c9f26fcf" />
+<img width="800" alt="vehicle-front" src= <img width="1280" height="960" alt="vehicle-front2" src="https://github.com/user-attachments/assets/1d4906d4-73df-4048-b55e-6b170eb6911e" />
+>
 </p>
 
 * **Justificación Técnica:**
