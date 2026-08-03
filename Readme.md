@@ -39,11 +39,11 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
   <td width="60%" valign="middle" bgcolor="#0d1117">
   <h3>Especificaciones</h3>
       <ul>
-        <li><strong>Voltaje de motores (VM):</strong> 2.5V - 13.5V</li>
-        <li><strong>Voltaje lógico (VCC):</strong> 2.7V - 5.5V</li>
+        <li><strong>Voltaje de motores (VM):</strong> 5V - 35V</li>
+        <li><strong>Voltaje lógico (VCC):</strong> 5V - 7V</li>
         <li><strong>Corriente de salida:</strong> 1.2A continuos (3.2A pico por canal)</li>
         <li><strong>Canales:</strong> Controla hasta 2 motores de DC o 1 motor paso a paso</li>
-        <li><strong>Protecciones:</strong> Térmica integrada y detección de bajo voltaje</li>
+        <li><strong>Protecciones:</strong> Térmica integrada y diodos de proteción contra retorno de corriente</li>
       </ul>
     </td>
   </tr>
