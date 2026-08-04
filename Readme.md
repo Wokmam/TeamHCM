@@ -335,7 +335,7 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
       <td align="center" valign="middle">1</td>
       <td align="left" valign="middle">Puente H l298n</td>
       <td align="center">
-        <img width="220" alt="l298n" src= "https://github.com/user-attachments/assets/acbdfb10-64ec-4dc8-bd1b-a453af3a34db" />
+        <img width="220" alt="l298n" src= "https://github.com/user-attachments/assets/acbdfb10-64ec-4dc8-bd1b-a453af3a34db" 
       </td>
     </tr>
          <td align="center" valign="middle">1</td>
