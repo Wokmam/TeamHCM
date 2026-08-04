@@ -342,8 +342,5 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
       <td align="left" valign="middle">esp32cam</td>
       <td align="center">
         <img width="220" alt="esp32cam" src=  "https://github.com/user-attachments/assets/24724ab8-2df3-4dde-b2e7-aad3f378f28c" />
-
-      </td>
-    </tr>
   </tbody>
 </table>
