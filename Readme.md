@@ -394,5 +394,17 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
         <img width="220" alt="espadines hembras"src="https://github.com/user-attachments/assets/8d92ee3c-fa4f-477f-a81a-2cfbccbb0b0e" />
       </td>
     </tr>
+              <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">capacitor</td>
+      <td align="center">
+        <img width="220" alt="capacitor" src="https://github.com/user-attachments/assets/5fbe84a5-8882-44c8-bbff-e474fb255359" />
+      </td>
+    </tr>
+               <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">regulador de voltaje 5v</td>
+      <td align="center">
+        <img width="220" alt="regulador"src="https://github.com/user-attachments/assets/a231a550-9a0f-4325-a7ed-b49d20ca751d" />
+      </td>
+    </tr>
   </tbody>
 </table>
