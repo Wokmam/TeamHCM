@@ -345,5 +345,13 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
         </td>
       </tr>
    </tr>
+        <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">hc-sr04</td>
+      <td align="center">
+        <img width="220" alt="hc-sr04" src="https://github.com/user-attachments/assets/344ec42e-f23a-4cf3-90c8-152ebe28890f" />
+ 
+        </td>
+      </tr>
+   </tr>
   </tbody>
 </table>
