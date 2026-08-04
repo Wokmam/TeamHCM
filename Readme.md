@@ -271,7 +271,7 @@ Tenemos un regulador de voltaje elevador y reductor o *step-up/down*, el cual es
 
 **Etapa de potencia y actuadores**
 El elevador de voltaje está ajustado a 12 V. Desde esos 12 V que ofrece el elevador alimentamos el módulo puente H L298N. La salida del puente H está conectada a un motor DC con encoder. En el Arduino tenemos conectados los pines de control IN1 e IN2, mientras que el pin ENA está conectado al pin 8 del Arduino. Usamos el pin 8 por ser un pin PWM, lo que nos permite modificar el ancho de pulso y así ajustar la velocidad del motor según sea necesario.
-
+<td/>
         <img width="220" alt="l298n" src= "https://github.com/user-attachments/assets/acbdfb10-64ec-4dc8-bd1b-a453af3a34db" 
 
 Tenemos dos LED: uno rojo y uno azul. El ánodo del LED rojo está conectado al pin 5 del Arduino y el ánodo del LED azul está conectado al pin 9. Ambos LED tienen su cátodo conectado a GND, que es el polo negativo del Arduino. También tenemos conectado un servomotor MG90S con engranajes metálicos, el cual proporciona un torque mayor al SG90 tradicional. Este servo está conectado al pin 7 del Arduino, que es un pin PWM. El servomotor se alimenta desde el regulador de 5 V que alimenta al Arduino, desde donde sale un nodo.
@@ -281,8 +281,8 @@ Tenemos conectados los sensores de ultrasonidos a los lados y en el centro. El s
 
 También tenemos un giroscopio conectado al pin 20 para la línea SDA y al pin 21 para la línea SCL. Contamos con un pulsador normalmente abierto conectado al pin 28 del Arduino en configuración *pull-down*. Finalmente, hay un capacitor de 1000 microfaradios en el servomotor y otro de 470 microfaradios en el Arduino Mega Pro Mini.
 
-
-    <img width="220" alt="hc-sr04" src="https://github.com/user-attachments/assets/344ec42e-f23a-4cf3-90c8-152ebe28890f" />
+<td/>
+    <img width="220" alt="hc-sr04" src="https://github.com/user-attachments/assets/344ec42e-f23a-4cf3-90c8-152ebe28890f"/>
 
 
 
