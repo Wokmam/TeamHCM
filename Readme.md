@@ -382,5 +382,17 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
         <img width="220" alt="led rojo"src="https://github.com/user-attachments/assets/82e8ffb4-12c1-4873-bf0c-a205bb54e91d" />
       </td>
     </tr>
+           <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">espadines macho</td>
+      <td align="center">
+        <img width="220" alt="espadines macho"src="https://github.com/user-attachments/assets/359afadf-10fe-47fc-93f8-a762a6ec4a2d" />
+      </td>
+    </tr>
+             <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">espadines hembras</td>
+      <td align="center">
+        <img width="220" alt="espadines hembras"src="https://github.com/user-attachments/assets/8d92ee3c-fa4f-477f-a81a-2cfbccbb0b0e" />
+      </td>
+    </tr>
   </tbody>
 </table>
