@@ -283,6 +283,10 @@ También tenemos un giroscopio conectado al pin 20 para la línea SDA y al pin 2
 
 
 
+
+
+
+
 <h2>🎯 Desafíos de la Competencia</h2>
 <table align="center" width="100%">
   <tr>
