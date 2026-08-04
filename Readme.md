@@ -262,6 +262,24 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
 </table>
 
 
+**Conexión electrónica**
+
+**Arreglo de alimentación y consumo**
+Estamos trabajando con 4 baterías en una conexión mixta, con lo cual nos referimos a que están conectadas en serie y en paralelo. Vamos a llamar al primer grupo de baterías como Grupo A y a las otras dos baterías como Grupo B. Las dos baterías de cada grupo están conectadas entre sí en paralelo, y luego el Grupo A y el Grupo B están conectados en serie. Esto nos proporciona una corriente de 4 A, equivalente a 4000 mA, y un voltaje de 8 V.
+
+Tenemos un regulador de voltaje elevador y reductor o *step-up/down*, el cual es muy práctico ya que permite subir y bajar el voltaje. El elevador está conectado desde el polo positivo y el negativo de las baterías. Desde este mismo positivo donde se alimenta el elevador existe un nodo conectado a un regulador de 5 V, y desde este regulador alimentamos el Arduino Mega Pro Mini. Además, contamos con un interruptor ubicado en la línea positiva que controla el encendido de todos los componentes.
+
+**Etapa de potencia y actuadores**
+El elevador de voltaje está ajustado a 12 V. Desde esos 12 V que ofrece el elevador alimentamos el módulo puente H L298N. La salida del puente H está conectada a un motor DC con encoder. En el Arduino tenemos conectados los pines de control IN1 e IN2, mientras que el pin ENA está conectado al pin 8 del Arduino. Usamos el pin 8 por ser un pin PWM, lo que nos permite modificar el ancho de pulso y así ajustar la velocidad del motor según sea necesario.
+
+Tenemos dos LED: uno rojo y uno azul. El ánodo del LED rojo está conectado al pin 5 del Arduino y el ánodo del LED azul está conectado al pin 9. Ambos LED tienen su cátodo conectado a GND, que es el polo negativo del Arduino. También tenemos conectado un servomotor MG90S con engranajes metálicos, el cual proporciona un torque mayor al SG90 tradicional. Este servo está conectado al pin 7 del Arduino, que es un pin PWM. El servomotor se alimenta desde el regulador de 5 V que alimenta al Arduino, desde donde sale un nodo.
+
+**Sensores y componentes adicionales**
+Tenemos conectados los sensores de ultrasonidos a los lados y en el centro. El sensor del lado izquierdo está conectado a los pines 31 y 30, el del centro a los pines 27 y 29, y el del lado derecho a los pines 23 y 25.
+
+También tenemos un giroscopio conectado al pin 20 para la línea SDA y al pin 21 para la línea SCL. Contamos con un pulsador normalmente abierto conectado al pin 28 del Arduino en configuración *pull-down*. Finalmente, hay un capacitor de 1000 microfaradios en el servomotor y otro de 470 microfaradios en el Arduino Mega Pro Mini.
+
+
 
 
 
