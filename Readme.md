@@ -355,7 +355,7 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
        <td align="center" valign="middle">1</td>
       <td align="left" valign="middle">motor dc con encoder</td>
       <td align="center">
-        <img width="220" alt="l298n" src="https://github.com/user-attachments/assets/1617e8e5-d2b2-4e00-866d-53f5e1a5e37c"> 
+        <img width="220" alt="l298n"src="https://github.com/user-attachments/assets/6a83c77a-f4a3-4415-80d0-be58ab4c0c7c"> 
       </td>
     </tr>
   </tbody>
