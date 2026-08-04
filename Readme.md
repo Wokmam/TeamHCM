@@ -278,7 +278,7 @@ Tenemos dos LED: uno rojo y uno azul. El ánodo del LED rojo está conectado al 
 Tenemos conectados los sensores de ultrasonidos a los lados y en el centro. El sensor del lado izquierdo está conectado a los pines 31 y 30, el del centro a los pines 27 y 29, y el del lado derecho a los pines 23 y 25.
 
 También tenemos un giroscopio conectado al pin 20 para la línea SDA y al pin 21 para la línea SCL. Contamos con un pulsador normalmente abierto conectado al pin 28 del Arduino en configuración *pull-down*. Finalmente, hay un capacitor de 1000 microfaradios en el servomotor y otro de 470 microfaradios en el Arduino Mega Pro Mini.
-
+    <img width="220" alt="hc-sr04" src="https://github.com/user-attachments/assets/344ec42e-f23a-4cf3-90c8-152ebe28890f" />
 
 
 
