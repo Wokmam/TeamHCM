@@ -365,9 +365,9 @@ La implementación de la IMU es fundamental para el sistema de navegación del v
       </td>
     </tr>
        <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">vaquelita perforada</td>
+      <td align="left" valign="middle">vaquelita perforada grande</td>
       <td align="center">
-        <img width="220" alt="vaquelita perforada" src="https://github.com/user-attachments/assets/b8ae29a6-8f06-4229-b878-d9a69a88dfa5">
+        <img width="220" alt="vaquelita perforada grande" src="https://github.com/user-attachments/assets/b8ae29a6-8f06-4229-b878-d9a69a88dfa5">
       </td>
     </tr>
   </tbody>
