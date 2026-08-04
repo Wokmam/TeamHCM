@@ -125,7 +125,7 @@ El varillaje mecánico de la dirección delantera está diseñado siguiendo geom
 
 <p align="center">
 <img width="800" alt="vehicle-front" src= <img width="1280" height="960" alt="vehicle-front2" src="https://github.com/user-attachments/assets/1d4906d4-73df-4048-b55e-6b170eb6911e" />
->
+
 </p>
 
 * **Justificación Técnica:**
