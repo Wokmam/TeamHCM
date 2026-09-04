@@ -12,42 +12,6 @@ El desafío central de este año se enfoca en la conducción autónoma. Diseñar
 
 
 
-
-  <tr>    
-    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="300" alt="bb0c992e-8172-4063-9124-5125c4acf2e3 __CR0_0_300_300_PT0_SX300_V1___-removebg-preview" src="https://github.com/user-attachments/assets/d98996ff-f785-405b-802a-cbc001e01816" />
-    </td>
-    <td width="60%" valign="middle" bgcolor="#0d1117">
-      <h3>Especificaciones:</h3>
-      <ul>
-        <li><strong>Tipo:</strong> Digital</li>
-        <li><strong>Velocidad:</strong> 0.12 sec/60° (4.8V)</li>
-        <li><strong>Torque:</strong> 1.8 kg-cm (4.8V)</li>
-        <li><strong>Voltaje:</strong> 5V</li>
-        <li><strong>Rango de Operación:</strong> 0°-180°</li>
-      </ul>
-    </td>
-  </tr>
-
-
-
- <tr>    
-    <td width="40%" align="center" valign="middle" bgcolor="#0d1117">
-    <img width="500" alt="800x800-removebg-preview" src= /><img width="524" height="586" alt="puente h l290" src="https://github.com/user-attachments/assets/72785d27-0a95-4e2b-9ada-a176bd655cfc" />
-
-  </td>
-  <td width="60%" valign="middle" bgcolor="#0d1117">
-  <h3>Especificaciones</h3>
-      <ul>
-        <li><strong>Voltaje de motores (VM):</strong> 5V - 35V</li>
-        <li><strong>Voltaje lógico (VCC):</strong> 5V - 7V</li>
-        <li><strong>Corriente de salida:</strong> 1.2A continuos (3.2A pico por canal)</li>
-        <li><strong>Canales:</strong> Controla hasta 2 motores de DC o 1 motor paso a paso</li>
-        <li><strong>Protecciones:</strong> Térmica integrada y diodos de proteción contra retorno de corriente</li>
-      </ul>
-    </td>
-  </tr>
-
 ## 1. Arquitectura General del Sistema
 El vehículo utiliza una configuración de **Tracción Trasera (RWD)** combinada con un sistema de **Dirección Delantera**. Esta disposición emula el comportamiento de un automóvil real.
 <p align="center">
