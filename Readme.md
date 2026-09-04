@@ -10,6 +10,8 @@
 El desafío central de este año se enfoca en la conducción autónoma. Diseñar un coche capaz de tomar decisiones por sí mismo lleva la robótica educativa al siguiente nivel, forzando a los participantes a dominar herramientas de última generación y aportando un nivel de ingeniería y dinamismo.
 
 
+<h2>Secciones</h2>
+
 
 
 ## 1. Arquitectura General del Sistema
