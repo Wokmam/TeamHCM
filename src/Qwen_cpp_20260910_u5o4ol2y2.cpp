@@ -1,0 +1,13 @@
+void controlarMotor100() {
+  digitalWrite(IN1, HIGH); digitalWrite(IN2, LOW);
+  analogWrite(ENA, 150); // Velocidad reducida
+}
+
+void stop() {
+  analogWrite(ENA, 0);
+  digitalWrite(IN1, LOW); digitalWrite(IN2, LOW);
+  delay(1000); 
+}
+
+// En las funciones de posición, al final:
+// else if (distancia >= 480) { controlarMotor100(); stop(); }
