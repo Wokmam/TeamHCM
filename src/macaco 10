@@ -1,10 +1,9 @@
-// [Aquí iría tu código completo macaco.ino que subiste]
-// Destacando la mejora en la detección:
+
 void detectarpocisionia() {
   // Lógica anidada más limpia que evita el solapamiento de condiciones
   if (distFe >= 150 && distFe <= 200) {
     if (distIz <= 30 && distDe > 30) estadopos = 1;
     else if (distIz > 30 && distDe <= 30) estadopos = 3; 
-    // ...
+
   }
 }
