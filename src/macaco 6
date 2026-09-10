@@ -10,5 +10,5 @@ void posicion1velocidad200() {
     controlarServoIMU(); controlarMotor200();
     modoCentradoActivo = true; setpoint = 180; // Curva centrando
   }
-  // ... (Resto de intervalos hasta llegar a ~490 cm)
+
 }
