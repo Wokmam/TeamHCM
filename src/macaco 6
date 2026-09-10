@@ -1,3 +1,15 @@
+
+void posicion2velocidad200() { /* Intervalos y setpoints para ruta 2 */ }
+void posicion3velocidad200() { /* Intervalos y setpoints para ruta 3 */ }
+void posicion4adelante()       { /* Intervalos y setpoints para ruta 4 */ }
+void posicion5adelante()       { /* Intervalos y setpoints para ruta 5 */ }
+void posicion6adelante()       { /* Intervalos y setpoints para ruta 6 */ }
+
+estas funciones son para ejecutarce dependiendo de la posicion del carro para completar una ruta en concreto realizando el reto abierto. 
+
+Dentro de las funciones void irian los intervalos que deseariamos hacer esto es diferente con cada robot por las dimenciones  y senmantica de cada uno.
+
+el primer void es un ejemplo de lo que iria adentro de las funciones
 void posicion1velocidad200() {
   float distancia = obtenerDistanciaCm();
   if (distancia >= 0 && distancia <= 22.56) {
@@ -12,15 +24,3 @@ void posicion1velocidad200() {
   }
 
 }
-
-void posicion2velocidad200() { /* Intervalos y setpoints para ruta 2 */ }
-void posicion3velocidad200() { /* Intervalos y setpoints para ruta 3 */ }
-void posicion4adelante()       { /* Intervalos y setpoints para ruta 4 */ }
-void posicion5adelante()       { /* Intervalos y setpoints para ruta 5 */ }
-void posicion6adelante()       { /* Intervalos y setpoints para ruta 6 */ }
-
-estas funciones son para ejecutarce dependiendo de la posicion del carro para completar una ruta en concreto realizando el reto abierto. 
-
-Dentro de las funciones void irian los intervalos que deseariamos hacer esto es diferente con cada robot por las dimenciones  y senmantica de cada uno.
-
-el primer void es un ejemplo de lo que iria adentro de las funciones
