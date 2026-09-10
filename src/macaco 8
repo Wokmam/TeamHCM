@@ -14,4 +14,4 @@ void posicion1inverso() {
     setpoint = -180; 
 }
 
-el pulldow es una variable almacenada como cero en el void setup que va a cambiar a 1 si se cumple una condicion
+//el pulldow es una variable almacenada como cero en el void setup que va a cambiar a 1 si se cumple una condicion
