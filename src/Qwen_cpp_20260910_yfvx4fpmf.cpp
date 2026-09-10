@@ -1,0 +1,20 @@
+#include <NewPing.h>
+// ... (Pines de trig/echo)
+NewPing IZ(31, 30, 400), FE(27, 29, 400), DE(23, 25, 400);
+int distIz, distDe;
+bool modoCentradoActivo = false;
+float Kp_pared = 0.8;
+
+void actualizarDistancias() {
+  distIz = IZ.ping_cm(); distDe = DE.ping_cm();
+}
+
+void controlarServoIMU() {
+  mpu.update();
+  float error = setpoint - mpu.getAngleZ();
+  float correccionPared = 0.0;
+  if (modoCentradoActivo) {
+    correccionPared = constrain((distDe - distIz) * Kp_pared, -30.0, 30.0);
+  }
+  myservo.write(constrain(centroServo + (Kp * error) + correccionPared, 71, 93));
+}
