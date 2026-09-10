@@ -289,9 +289,9 @@ También tenemos un giroscopio conectado al pin 20 para la línea SDA y al pin 2
 
 
 
+<h2>Partes del codigo</h2>
 
-
-
+control de los motores
 
 
 
