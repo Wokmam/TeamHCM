@@ -291,12 +291,27 @@ También tenemos un giroscopio conectado al pin 20 para la línea SDA y al pin 2
 
 <h2>Partes del codigo</h2>
 
-control de los motores
+*control de los motores*
+
+#define ENA 8
+#define IN1 4
+#define IN2 6
+int velocidadMotor = 255;
+
+void setup() {
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, velocidadMotor);
+}
 
 
-
-
-
+esta parte del codigo se encarga de controlar el  motor para despues integrarlo a las variables 
 
 <h2>Lista de Componentes</h2>
 
