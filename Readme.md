@@ -119,12 +119,12 @@ para el portabaterías, la PCB principal y los sensores ultrasónicos. Toda la u
   <tbody>
     <tr>
       <td align="center" valign="middle">Largo</td>
-      <td align="left" valign="middle">19,5</td>
+      <td align="left" valign="middle">25</td>
       </td>
     </tr>
     <tr>
       <td align="center" valign="middle">Ancho</td>
-      <td align="left" valign="middle">16.8cm</td>
+      <td align="left" valign="middle">16.8</td>
       </td>
     </tr>
     <tr>
