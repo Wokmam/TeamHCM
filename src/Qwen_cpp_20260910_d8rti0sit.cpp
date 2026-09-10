@@ -1,0 +1,24 @@
+int estadopos = 0;
+bool Anyi = false; // Flag de inicio
+
+void loop() {
+  if (digitalRead(pin2) == 1 && !Anyi) Anyi = true;
+  
+  if (Anyi) {
+    if (estadopos == 0) {
+      detectarpocision(); // Lee sensores y asigna estadopos (1 a 6)
+    } else {
+      // Ejecutar ruta según estadopos
+    }
+  }
+}
+
+void detectarpocision() {
+  // Lee distIz, distFe, distDe
+  if (distFe > 150 && distFe < 200) {
+    if (distIz < 30) estadopos = 1;
+    else if (distDe < 30) estadopos = 3;
+    else estadopos = 2;
+  }
+  // ... Zonas inferiores
+}
