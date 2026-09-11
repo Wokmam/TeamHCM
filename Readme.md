@@ -31,6 +31,7 @@
     </td>
   </tr>
 </table>
+
 > *Puedes ver más detalles e imágenes en la carpeta [t-photos](t-photos/).*
 
 
