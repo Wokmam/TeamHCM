@@ -3,6 +3,27 @@
 
 ¡Bienvenidos al repositorio oficial de nuestro equipo! Aquí documentamos todo el desarrollo, código, diseño y avances para nuestra participación.
 
+Somos un equipo de jóvenes apasionados por la robótica y la programación, compitiendo en la **World Robot Olympiad (WRO)** en la categoría **Futuros Ingenieros**.
+
+Nuestro objetivo: construir un carro autónomo capaz de completar **3 vueltas** en una pista específica, combinando electrónica y programación.
+
+## 🧑‍💻 Conoce al Equipo
+
+| Nombre | Edad | Rol | Especialidad |
+| :--- | :---: | :--- | :--- |
+| **Miguel Salas** | 18 | Hardware Lead | Electrónica y circuitos |
+| **Carlos Armijo** | 17 | Software Lead | Programación y algoritmos |
+| **Julio Camacho** | 14 | DevOps & Git | Gestión de repositorios |
+
+### Nuestro Proyecto: Carro Autónomo WRO
+
+###  Objetivo
+Diseñar y programar un vehículo autónomo que:
+- Navegue de forma precisa por una pista definida
+- Complete 3 vueltas sin intervención humana
+- Optimice tiempo y eficiencia en cada vuelta
+
+
 # Índice de Contenidos — Team Born To Win (WRO Future Engineers)
 
 1. [Presentación del Equipo](#1-presentación-del-equipo)
