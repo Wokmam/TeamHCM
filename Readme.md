@@ -46,7 +46,7 @@
   </tr>
 </table>
 
-> *Puedes ver más detalles e imágenes en la carpeta [t-photos](t-photos/).*
+> *Puedes ver más detalles e imágenes en la carpeta [t-photos](t-photos/).*<
 somos estudiantes que nos reunimos para hacer nuestro equipo buscando realizar un carro autonomo cuyo objetivo es realizar 3 vueltas entro de una pista especifica,
  
 # Índice de Contenidos — Team Born To Win (WRO Future Engineers)
