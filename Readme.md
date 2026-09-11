@@ -4,19 +4,17 @@
 
 ¡Bienvenidos al repositorio oficial de nuestro equipo! Aquí documentamos todo el desarrollo, código, diseño y avances para nuestra participación.
 
----
 
 ## 👥 Nuestro Equipo
 
-
-
----
 
 ## 📸 Conoce al Equipo
 
 <p align="center">
   <img src="t-photos/equipo%20completo%20.jpeg" width="600" alt="Equipo completo Team HCM">
 </p>
+## 👥 Nuestro Equipo
+
 <table align="center">
   <tr>
     <td align="center" width="33%">
