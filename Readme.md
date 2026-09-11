@@ -460,7 +460,7 @@ float obtenerDistanciaCm() {
   return t * CM_POR_TICK;
 }
 ```
-con esta parte del codigo nos permite saber cuando girar ya que podemos calcular la distancia recorrida
+Con esta parte del codigo nos permite saber cuando girar ya que podemos calcular la distancia recorrida.
 
 ## funciones 
 ```cpp
@@ -485,7 +485,7 @@ void posicion5adelante()       { /* Intervalos y setpoints para ruta 5 */ }
 void posicion6adelante()       { /* Intervalos y setpoints para ruta 6 */ }
 ```
 
-esta parte del codigo tiene la capacidad de decidir que ruta hace el robot de pendiendo de los valores del  giroscopio y los sensores de ultra sonido
+Esta parte del codigo tiene la capacidad de decidir que ruta hace el robot de pendiendo de los valores del  giroscopio y los sensores de ultra sonido.
 
 ## pulldown
 ```cpp
@@ -505,7 +505,7 @@ void posicion1inverso() {
     setpoint = -180; 
 }
 ```
-esta parte del código permite hacer que el código pueda inicializar los proceso de ubicación y arranque del carro
+Esta parte del código permite hacer que el código pueda inicializar los proceso de ubicación y arranque del carro.
 <h2>Lista de Componentes</h2>
 
   
