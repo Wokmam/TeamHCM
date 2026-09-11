@@ -3,6 +3,18 @@
 
 ¡Bienvenidos al repositorio oficial de nuestro equipo! Aquí documentamos todo el desarrollo, código, diseño y avances para nuestra participación.
 
+# Índice de Contenidos — Team Born To Win (WRO Future Engineers)
+
+1. [Presentación del Equipo](#1-presentación-del-equipo)
+2. [World Robot Olympiad (WRO)](#2-world-robot-olympiad-wro)
+3. [Arquitectura General del Sistema](#3-arquitectura-general-del-sistema)
+4. [Sistema de Tracción (Tren Trasero)](#4-sistema-de-tracción-tren-trasero)
+5. [Sistema de Dirección (Tren Delantero)](#5-sistema-de-dirección-tren-delantero)
+6. [Diseño Estructural e Impresión 3D del Chasis](#6-diseño-estructural-e-impresión-3d-del-chasis)
+7. [Sistema Electrónico y Sensores](#7-sistema-electrónico-y-sensores)
+8. [Desafíos de la Competencia](#8-desafíos-de-la-competencia)
+9. [Partes del Código (Firmware)](#9-partes-del-código-firmware)
+10. [Lista de Componentes](#10-lista-de-componentes)
 
 ## 📸 Conoce al Equipo
 
