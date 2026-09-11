@@ -9,6 +9,7 @@
 <p align="center">
   <img src="t-photos/equipo%20completo%20.jpeg" width="600" alt="Equipo completo Team HCM">
 </p>
+
 ## 👥 Nuestro Equipo
 
 <table align="center">
