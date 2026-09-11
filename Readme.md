@@ -368,9 +368,29 @@ float obtenerDistanciaCm() {
 esta parte del codigo se encarga de ubicar el carro en las diferentes pociciones de salida 
 
 pasos contados de los motores 
+```cpp
+#define Clk 3
+#define Dt 2
+volatile long ticks = 0;
+const float CM_POR_TICK = 0.01;
 
+void setup() {
+  // ...
+  attachInterrupt(digitalPinToInterrupt(Clk), ENCODER, CHANGE);
+}
 
+void ENCODER() {
+  int A = digitalRead(Clk); int B = digitalRead(Dt);
+  // Lógica de cuadratura para sumar/restar ticks
+  if (A == 1) ticks += (B == 0) ? 1 : -1; 
+}
 
+float obtenerDistanciaCm() {
+  long t; noInterrupts(); t = ticks; interrupts();
+  return t * CM_POR_TICK;
+}
+```
+con esta parte del codigo nos permite saber cuando girar ya que podemos calcular la distancia recorrida
 <h2>Lista de Componentes</h2>
 
   
