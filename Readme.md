@@ -62,7 +62,7 @@
 
 ---
 
-<h2>World Robot Olympiad (WRO)</h2>
+<h2>2. World Robot Olympiad (WRO)</h2>
 <p align="center">
 <img width="600" alt="{4F88DD0A-A459-4292-9581-5FD236E6E98C}" src="https://github.com/user-attachments/assets/9d2b5d73-df28-4905-b5f3-3db38d8a8192" />
 </p>
