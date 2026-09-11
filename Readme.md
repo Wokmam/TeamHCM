@@ -614,5 +614,12 @@ Esta parte del código permite hacer que el código pueda inicializar los proces
         <img width="320" height="294" alt="litio" src="https://github.com/user-attachments/assets/0307f1cf-989f-4255-9048-d7ccf78c66e3" />
       </td>
     </tr>
+    <tr>
+      <td align="center" valign="middle">1</td>
+      <td align="left" valign="middle">MPU6050</td>
+      <td align="center">
+        <img width="250" height="250" alt="button" src="https://github.com/user-attachments/assets/8963cf3a-c4ab-48b1-a015-b449b536d684" />
+      </td>
+    </tr>
   </tbody>
 </table>
