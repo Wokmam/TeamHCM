@@ -1,4 +1,44 @@
 <h1>Somos el Team Born To Win WRO Future Engineers</h1>
+
+# 🤖 Team HCM - WRO Future Engineers
+
+¡Bienvenidos al repositorio oficial de nuestro equipo! Aquí documentamos todo el desarrollo, código, diseño y avances para nuestra participación.
+
+---
+
+## 👥 Nuestro Equipo
+
+<table align="center">
+  <tr>
+    <td align="center" width="33%">
+      <h3>Carlos Armijo</h3>
+      <p><b>Edad:</b> 17 años</p>
+      <p><b>Rol:</b> Lógica de programación y estrategias</p>
+    </td>
+    <td align="center" width="33%">
+      <h3>Julio Noguera</h3>
+      <p><b>Edad:</b> 14 años</p>
+      <p><b>Rol:</b> Gestión de GitHub, control de actualizaciones y estrategia</p>
+    </td>
+    <td align="center" width="33%">
+      <h3>Miguel Salas</h3>
+      <p><b>Edad:</b> 18 años</p>
+      <p><b>Rol:</b> Mecánica, diseño 3D y electrónica</p>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 📸 Conoce al Equipo
+
+<p align="center">
+  <img src="t-photos/equipo%20completo%20.jpeg" width="600" alt="Equipo completo Team HCM">
+</p>
+
+> *Puedes ver más detalles e imágenes en la carpeta [t-photos](t-photos/).*
+
+
 <h2>World Robot Olympiad (WRO)</h2>
 <p align="center">
 <img width="600" alt="{4F88DD0A-A459-4292-9581-5FD236E6E98C}" src="https://github.com/user-attachments/assets/9d2b5d73-df28-4905-b5f3-3db38d8a8192" />
