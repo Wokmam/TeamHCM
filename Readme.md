@@ -616,7 +616,7 @@ Esta parte del código permite hacer que el código pueda inicializar los proces
     </tr>
     <tr>
       <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">MPU6050</td>
+      <td align="left" valign="middle">Botón</td>
       <td align="center">
         <img width="250" height="250" alt="button" src="https://github.com/user-attachments/assets/8963cf3a-c4ab-48b1-a015-b449b536d684" />
       </td>
