@@ -141,10 +141,9 @@ El control angular de las ruedas delanteras se realiza mediante un servomotor de
 El varillaje mecánico de la dirección delantera está diseñado siguiendo geométricamente el principio de **Ackerman**.
 
 <p align="center">
-<img width="800" alt="vehicle-front" src= "<img width="1280 height="960" alt="vehicle-front2"/>
-   </td>
-    </tr>
+<img width="407" alt="parte delantera del carro" src="https://github.com/user-attachments/assets/ff42de8b-fbef-4b90-9753-e3692d83cc01" />
 </p>
+
 
 * **Justificación Técnica:**
     * **Estructura Impresa en 3D:** Al igual que el tren trasero, las varillas y las manguetas de la dirección están fabricados totalmente mediante impresión 3D en **PETG**.
