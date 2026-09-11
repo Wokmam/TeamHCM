@@ -415,10 +415,27 @@ void posicion4adelante()       { /* Intervalos y setpoints para ruta 4 */ }
 void posicion5adelante()       { /* Intervalos y setpoints para ruta 5 */ }
 void posicion6adelante()       { /* Intervalos y setpoints para ruta 6 */ }
 ```
-esta parte del codigo tiene la capacidad de decidir que ruta hace el robot de pendiendo del giroscopio y los sensores de ultra sonido
+esta parte del codigo tiene la capacidad de decidir que ruta hace el robot de pendiendo de los valores del  giroscopio y los sensores de ultra sonido
 
+## pulldow
+```cpp
+void loop() {
+  if (pulldowm == 1) {
+    if (estadoposinverso == 1) posicion1inverso();
+ 
+  } else {
+    if (estadopos == 1) posicion1velocidad200();
 
+  }
+}
 
+void posicion1inverso() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 22.56 && distancia <= 48.21) {
+    setpoint = -180; 
+}
+```
+esta parte del código permite hacer que el código pueda inicializar los proceso de ubicación y arranque del carro
 <h2>Lista de Componentes</h2>
 
   
