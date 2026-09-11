@@ -35,66 +35,20 @@
 </table>
 
 > *Puedes ver más detalles e imágenes en la carpeta [t-photos](t-photos/).*
-
 # Índice de Contenidos — Team Born To Win (WRO Future Engineers)
 
-1. **Presentación del Equipo**
-   - Conoce al Equipo (Fotografía grupal)
-   - Integrantes, Edades y Roles (Carlos Armijo, Julio Noguera, Miguel Salas)
+1. [Presentación del Equipo](#1-presentación-del-equipo)
+2. [World Robot Olympiad (WRO)](#2-world-robot-olympiad-wro)
+3. [Arquitectura General del Sistema](#3-arquitectura-general-del-sistema)
+4. [Sistema de Tracción (Tren Trasero)](#4-sistema-de-tracción-tren-trasero)
+5. [Sistema de Dirección (Tren Delantero)](#5-sistema-de-dirección-tren-delantero)
+6. [Diseño Estructural e Impresión 3D del Chasis](#6-diseño-estructural-e-impresión-3d-del-chasis)
+7. [Sistema Electrónico y Sensores](#7-sistema-electrónico-y-sensores)
+8. [Desafíos de la Competencia](#8-desafíos-de-la-competencia)
+9. [Partes del Código (Firmware)](#9-partes-del-código-firmware)
+10. [Lista de Componentes](#10-lista-de-componentes)
 
-2. **World Robot Olympiad (WRO)**
-   - Descripción general de la competencia y la categoría *Futuros Ingenieros*
-
-3. **Arquitectura General del Sistema**
-   - Configuración de Tracción Trasera (RWD) y Dirección Delantera
-
-4. **Sistema de Tracción (Tren Trasero)**
-   - Actuador Principal: Motor DC con Encoder (600 RPM)
-     - Especificaciones técnicas
-     - Motivos de selección (Cálculo de odometría)
-   - Caja de Engranajes y Sistema Diferencial
-     - Mecanismo impreso en 3D (PETG) y uso de rodamientos
-     - Prevención de derrapes en curvas
-
-5. **Sistema de Dirección (Tren Delantero)**
-   - Actuador de Dirección: Servomotor
-     - Especificaciones técnicas
-     - Motivos de selección (Control de posición preciso y piñonería metálica)
-   - Geometría de Dirección (Principio de Ackerman)
-     - Justificación técnica, estructura en PETG y rodamientos
-
-6. **Diseño Estructural e Impresión 3D del Chasis**
-   - Fabricación en Fusion 360 con filamento PETG
-   - Dimensiones principales del vehículo (Largo, Ancho, Alto)
-
-7. **Sistema Electrónico y Sensores**
-   - Esquema general de conexiones
-   - Unidad de Procesamiento: Arduino Mega Pro Mini
-     - Especificaciones y justificación de selección
-   - Sensores de Distancia: Ultrasonidos HC-SR04
-     - Funciones, posicionamiento y especificaciones técnicas
-   - Unidad de Medición Inercial (IMU): MPU6050
-     - Funcionamiento, protocolo I2C y corrección de trayectoria (Yaw)
-   - Arreglo de Alimentación y Consumo
-     - Configuración mixta de baterías (Serie/Paralelo) y regulador *step-up/down*
-   - Etapa de Potencia y Actuadores
-     - Mapeo del Puente H L298N, servomotor MG90S y componentes de señalización
-
-8. **Desafíos de la Competencia**
-   - Desafío Abierto (*Open Challenge*)
-   - Desafío de Obstáculos (*Obstacle Challenge*)
-
-9. **Partes del Código (Firmware)**
-   - Control de los motores (PWM y direcciones)
-   - Control del servomotor y giroscopio (Lógica de control proporcional Kp con MPU6050)
-   - Sistema de Ultrasonidos con librería `NewPing` (Pines de conexión y función no bloqueante con `millis()`)
-   - Pasos contados de los motores (Odometría por interrupciones de encoder)
-   - Funciones lógicas de rutas y selección de trayectorias
-   - Configuración y lectura del pulsador en modo *pull-down*
-
-10. **Lista de Componentes**
-    - Tabla detallada de cantidades, nombres e imágenes de referencia de todo el hardware utilizado
-
+---
 
 <h2>World Robot Olympiad (WRO)</h2>
 <p align="center">
