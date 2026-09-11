@@ -392,6 +392,33 @@ float obtenerDistanciaCm() {
 }
 ```
 con esta parte del codigo nos permite saber cuando girar ya que podemos calcular la distancia recorrida
+
+## funciones 
+```cpp
+void posicion1velocidad200() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 22.56) {
+    controlarServoIMU(); controlarMotor200();
+    modoCentradoActivo = false; setpoint = 0; // Recta inicial
+  } else if (distancia >= 22.56 && distancia <= 48.21) {
+    controlarServoIMU(); controlarMotor200();
+    modoCentradoActivo = false; setpoint = 180; // Curva
+  } else if (distancia >= 48.21 && distancia <= 70.77) {
+    controlarServoIMU(); controlarMotor200();
+    modoCentradoActivo = true; setpoint = 180; // Curva centrando
+  }
+
+}
+void posicion2velocidad200() { /* Intervalos y setpoints para ruta 2 */ }
+void posicion3velocidad200() { /* Intervalos y setpoints para ruta 3 */ }
+void posicion4adelante()       { /* Intervalos y setpoints para ruta 4 */ }
+void posicion5adelante()       { /* Intervalos y setpoints para ruta 5 */ }
+void posicion6adelante()       { /* Intervalos y setpoints para ruta 6 */ }
+```
+esta parte del codigo tiene la capacidad de decidir que ruta hace el robot de pendiendo del giroscopio y los sensores de ultra sonido
+
+
+
 <h2>Lista de Componentes</h2>
 
   
