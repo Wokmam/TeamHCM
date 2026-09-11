@@ -366,6 +366,11 @@ float obtenerDistanciaCm() {
 }
 ```
 esta parte del codigo se encarga de ubicar el carro en las diferentes pociciones de salida 
+
+pasos contados de los motores 
+
+
+
 <h2>Lista de Componentes</h2>
 
   
