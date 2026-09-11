@@ -426,7 +426,7 @@ void actualizarDistancias() {
   }
 }
 ## pasos contados de los motores 
-```cpp
+
 #define Clk 3
 #define Dt 2
 volatile long ticks = 0;
