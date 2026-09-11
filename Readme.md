@@ -476,7 +476,7 @@ void posicion6adelante()       { /* Intervalos y setpoints para ruta 6 */ }
 
 esta parte del codigo tiene la capacidad de decidir que ruta hace el robot de pendiendo de los valores del  giroscopio y los sensores de ultra sonido
 
-## pulldow
+## pulldown
 ```cpp
 void loop() {
   if (pulldowm == 1) {
