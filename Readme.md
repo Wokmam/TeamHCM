@@ -314,7 +314,8 @@ void loop() {
 }
 ```
 esta parte del codigo se encarga de controlar el  motor para despues integrarlo a las variables 
-control del servo motor y giroscopio
+
+## control del servo motor y giroscopio
 ```cpp
 #include <Wire.h>
 #include <MPU6050_tockn.h>
@@ -341,7 +342,7 @@ void loop() {
 ```
 esta parte del codigo se encarga de ubicar el sentido del carro para hacer que en las variables puedan girar gracias al servo motor
 
-sensores de ultra sonido
+## sensores de ultra sonido
 ```cpp
 
 #define Clk 3
@@ -367,7 +368,7 @@ float obtenerDistanciaCm() {
 ```
 esta parte del codigo se encarga de ubicar el carro en las diferentes pociciones de salida 
 
-pasos contados de los motores 
+## pasos contados de los motores 
 ```cpp
 #define Clk 3
 #define Dt 2
