@@ -608,8 +608,8 @@ esta parte del código permite hacer que el código pueda inicializar los proces
       </td>
     </tr>
       <tr>
-      <td align="center" valign="middle">1</td>
-      <td align="left" valign="middle">MPU6050</td>
+      <td align="center" valign="middle">4</td>
+      <td align="left" valign="middle">Baterias 18650</td>
       <td align="center">
         <img width="320" height="294" alt="litio" src="https://github.com/user-attachments/assets/0307f1cf-989f-4255-9048-d7ccf78c66e3" />
       </td>
