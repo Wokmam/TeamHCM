@@ -1,0 +1,1991 @@
+#include <NewPing.h>
+#include <Wire.h>
+#include <MPU6050_tockn.h>
+#include <Servo.h>
+#include <EEPROM.h>
+
+#define PIN_SERVO 7
+#define ENA 8
+#define IN1 4
+#define IN2 6
+#define ledrojo 5
+#define ledazul 9
+#define pin 28
+#define pin2 26
+#define obrojo 13
+#define obverde 15
+int julio;
+
+MPU6050 mpu(Wire);
+Servo myservo;
+
+bool Anyi = false;
+
+float yaw;
+float setpoint = 90;
+float centroServo = 82;
+float Kp = 0.8;        // Ganancia de la IMU
+float Kp_pared = 0.8;  // Ganancia del seguimiento de pared (ajusta si oscila mucho o poco)
+float error;
+float salida;
+float anguloServo;
+int velocidadMotor = 255;
+int estadopos = 0;
+int estadoposinverso = 0;
+
+// --- CONTROL DE SEGUIMIENTO DE PARED IZQUIERDA ---
+bool modoCentradoActivo = false;  // Ahora actúa como "modoSeguidorParedIzquierda"
+float setpointIzq = 5.0;         // Distancia deseada a la pared izquierda (15 cm)
+
+const int trigIZ = 31;
+const int echoIZ = 30;
+const int trigME = 27;
+const int echoME = 29;
+const int trigDE = 23;
+const int echoDE = 25;
+#define Max_Dist 400
+
+NewPing IZ(trigIZ, echoIZ, Max_Dist);
+NewPing FE(trigME, echoME, Max_Dist);
+NewPing DE(trigDE, echoDE, Max_Dist);
+
+int distIz = 0;
+int distFe = 0;
+int distDe = 0;
+
+unsigned long ultimoPing = 0;
+const int intervaloPing = 20;
+
+int Clk = 3;
+volatile int Last_Clk = 0;
+int Dt = 2;
+volatile long ticks = 0;
+const float CM_POR_TICK = 0.01;
+
+struct CalibrationData {
+  float gx, gy, gz;
+} calData;
+int pulldowm;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(ledrojo, OUTPUT);
+  pinMode(ledazul, OUTPUT);
+  pinMode(pin, INPUT);
+  pinMode(pin2, INPUT);
+  pinMode(trigIZ, OUTPUT);
+  pinMode(echoIZ, INPUT);
+  pinMode(trigME, OUTPUT);
+  pinMode(echoME, INPUT);
+  pinMode(trigDE, OUTPUT);
+  pinMode(echoDE, INPUT);
+
+  Last_Clk = digitalRead(Clk);
+  attachInterrupt(digitalPinToInterrupt(Clk), ENCODER, CHANGE);
+  mpu.begin();
+  EEPROM.get(0, calData);
+  mpu.setGyroOffsets(calData.gx, calData.gy, calData.gz);
+  myservo.attach(PIN_SERVO);
+  myservo.write(centroServo);
+  Serial.println("Sistema iniciado.");
+
+  int pullDowm = digitalRead(pin);
+  if (pullDowm == 1) {
+    pulldowm = 1;
+  } else if (pullDowm == 0) {
+    pulldowm = 0;
+  }
+  delay(700);
+}
+
+void loop() {
+  julio = digitalRead(pin2);
+
+  if (julio == 1 && Anyi == false) {
+    Anyi = true;
+  }
+
+  if (Anyi == true) {
+    /////////////////////////////////////////////////inversion de sentido antiorario
+    if (pulldowm == 1) {
+      if (estadoposinverso == 0) {
+        actualizarDistancias();
+        detectarpocisioninversoia();
+      } else if (estadoposinverso == 1) {
+        actualizarDistancias();
+        posicion1inverso();
+      } else if (estadoposinverso == 2) {
+        actualizarDistancias();
+        posicion2inverso();
+      } else if (estadoposinverso == 3) {
+        actualizarDistancias();
+        posicion3inverso();
+      } else if (estadoposinverso == 4) {
+        actualizarDistancias();
+        posicion4inversodelante();
+      } else if (estadoposinverso == 5) {
+        actualizarDistancias();
+        posicion5inversodelante();
+      } else if (estadoposinverso == 6) {
+        actualizarDistancias();
+        posicion6inversodelante();
+      }
+    } else if (pulldowm == 0) {
+      ////////////////////////////////////////////////////////////sentido HORARIO
+      if (estadopos == 0) {
+        actualizarDistancias();
+        detectarpocisionia();
+      } else if (estadopos == 1) {
+        actualizarDistancias();
+        posicion1velocidad200();
+      } else if (estadopos == 2) {
+        actualizarDistancias();
+        posicion2velocidad200();
+      } else if (estadopos == 3) {
+        actualizarDistancias();
+        posicion3velocidad200();
+      } else if (estadopos == 4) {
+        actualizarDistancias();
+        posicion4adelante();
+      } else if (estadopos == 5) {
+        actualizarDistancias();
+        posicion5adelante();
+      } else if (estadopos == 6) {
+        actualizarDistancias();
+        posicion6adelante();
+      }
+    }
+  }
+}
+
+// FUNCIONES DE CONTROL
+void actualizarDistancias() {
+  if (millis() - ultimoPing >= intervaloPing) {
+    distIz = IZ.ping_cm();
+    distDe = DE.ping_cm();
+    distFe = FE.ping_cm();
+    ultimoPing = millis();
+  }
+}
+
+void controlarServoIMU() {
+  mpu.update();
+  yaw = mpu.getAngleZ();
+  error = setpoint - yaw;
+  float correccionPared = 0.0;
+  
+  if (modoCentradoActivo == true) { // Ahora actúa como "Seguidor de Pared Izquierda"
+    float errorIzq = 0;
+    
+    if (distIz > 0) {
+      // Si distIz > 15, errorIzq es negativo -> gira a la izquierda para acercarse.
+      // Si distIz < 15, errorIzq es positivo -> gira a la derecha para alejarse.
+      errorIzq = setpointIzq - distIz; 
+    } else {
+      // Si no detecta la pared izquierda (0), asumimos que nos hemos alejado y forzamos giro a la izquierda
+      errorIzq = -25.0; 
+    }
+    
+    correccionPared = errorIzq * Kp_pared;
+    
+    // Seguridad: Si el sensor derecho detecta que estamos muy cerca de la pared derecha (< 20 cm),
+    // forzamos un giro a la izquierda para evitar el choque, sin importar la lectura izquierda.
+    if (distDe > 0 && distDe < 20) {
+      correccionPared -= 20.0; 
+    }
+
+    // Limitamos el ajuste máximo a 30 grados para que no gire bruscamente
+    correccionPared = constrain(correccionPared, -30.0, 30.0);
+  }
+  
+  // Sumamos la corrección de la pared al control normal de la IMU
+  salida = (Kp * error) + correccionPared;
+  anguloServo = centroServo + salida;
+  anguloServo = constrain(anguloServo, 71, 93);  // Ajusta estos límites a tu mecánica
+  myservo.write(anguloServo);
+
+  Serial.print("CM: ");
+  Serial.print(obtenerDistanciaCm());
+  Serial.print(" | Iz: ");
+  Serial.print(distIz);
+  Serial.print(" | Fe: ");
+  Serial.print(distFe);
+  Serial.print(" | De: ");
+  Serial.print(distDe);
+  Serial.print(" | Seguidor Izq: ");
+  Serial.println(modoCentradoActivo ? "ON" : "OFF");
+}
+
+void controlarServoIMUpro() {
+  mpu.update();
+  yaw = mpu.getAngleZ();
+  error = setpoint - yaw;
+  float correccionPared = 0.0;
+  
+  if (modoCentradoActivo == true) { 
+    float errorIzq = 0;
+    
+    if (distIz > 0) {
+      errorIzq = setpointIzq - distIz; 
+    } else {
+      errorIzq = -25.0; 
+    }
+    
+    correccionPared = errorIzq * Kp_pared;
+    
+    if (distDe > 0 && distDe < 30) {
+      correccionPared -= 20.0; 
+    }
+
+    correccionPared = constrain(correccionPared, -30.0, 30.0);
+  }
+  
+  salida = (Kp * error) + correccionPared;
+  anguloServo = centroServo + salida;
+  anguloServo = constrain(anguloServo, 65, 89);  // Ajusta estos límites a tu mecánica
+  myservo.write(anguloServo);
+
+  Serial.print("CM: ");
+  Serial.print(obtenerDistanciaCm());
+  Serial.print(" | Iz: ");
+  Serial.print(distIz);
+  Serial.print(" | Fe: ");
+  Serial.print(distFe);
+  Serial.print(" | De: ");
+  Serial.print(distDe);
+  Serial.print(" | Seguidor Izq: ");
+  Serial.println(modoCentradoActivo ? "ON" : "OFF");
+}
+
+void controlarMotor200() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, velocidadMotor);
+}
+
+void controlarMotor100() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 150);
+}
+
+void ENCODER() {
+  int A = digitalRead(Clk);
+  int B = digitalRead(Dt);
+  if (Last_Clk == 0 && A == 1) {
+    if (B == 0) ticks++;
+    else ticks--;
+  } else if (Last_Clk == 1 && A == 0) {
+    if (B == 1) ticks++;
+    else ticks--;
+  }
+  Last_Clk = A;
+}
+
+float obtenerDistanciaCm() {
+  long ticksActuales;
+  noInterrupts();
+  ticksActuales = ticks;
+  interrupts();
+  return ticksActuales * CM_POR_TICK;
+}
+
+// --- FUNCIONES DE DETECCIÓN Y POSICIÓN (Sin cambios en su lógica de estado) ---
+void detectarpocision() {
+  distIz = IZ.ping_cm();
+  delay(40);
+  distFe = FE.ping_cm();
+  delay(40);
+  distDe = DE.ping_cm();
+  delay(40);
+
+  if (distIz >= 0 && distIz < 30 && distFe > 150 && distFe < 200 && distDe > 25 && distDe < 100) {
+    digitalWrite(ledazul, LOW);
+    digitalWrite(ledrojo, HIGH);
+    estadopos = 1;
+  }
+  if (distIz > 10 && distIz < 55 && distFe > 150 && distFe < 200 && distDe > 10 && distDe < 55) {
+    digitalWrite(ledazul, HIGH);
+    digitalWrite(ledrojo, HIGH);
+    estadopos = 2;
+  }
+  if (distIz > 25 && distIz < 100 && distFe > 150 && distFe < 200 && distDe >= 0 && distDe < 30) {
+    digitalWrite(ledazul, HIGH);
+    digitalWrite(ledrojo, LOW);
+    estadopos = 3;
+  }
+  if (distIz >= 0 && distIz < 30 && distFe > 90 && distFe < 150 && distDe > 25 && distDe < 100) {
+    parpadeoRojo();
+    estadopos = 4;
+  }
+  if (distIz > 10 && distIz < 55 && distFe > 90 && distFe < 150 && distDe > 10 && distDe < 55) {
+    parpadeoAmbos();
+    estadopos = 5;
+  }
+  if (distIz > 25 && distIz < 100 && distFe > 90 && distFe < 150 && distDe >= 0 && distDe < 30) {
+    parpadeoAzul();
+    estadopos = 6;
+  }
+}
+
+void detectarpocisioninverso() {
+  distIz = IZ.ping_cm();
+  delay(40);
+  distFe = FE.ping_cm();
+  delay(40);
+  distDe = DE.ping_cm();
+  delay(40);
+
+  if (distIz >= 0 && distIz < 30 && distFe > 150 && distFe < 200 && distDe > 25 && distDe < 100) {
+    digitalWrite(ledazul, LOW);
+    digitalWrite(ledrojo, HIGH);
+    estadoposinverso = 3;
+  }
+  if (distIz > 10 && distIz < 55 && distFe > 150 && distFe < 200 && distDe > 10 && distDe < 55) {
+    digitalWrite(ledazul, HIGH);
+    digitalWrite(ledrojo, HIGH);
+    estadoposinverso = 2;
+  }
+  if (distIz > 25 && distIz < 100 && distFe > 150 && distFe < 200 && distDe >= 0 && distDe < 30) {
+    digitalWrite(ledazul, HIGH);
+    digitalWrite(ledrojo, LOW);
+    estadoposinverso = 1;
+  }
+  if (distIz >= 0 && distIz < 30 && distFe > 90 && distFe < 150 && distDe > 25 && distDe < 100) {
+    parpadeoRojo();
+    estadoposinverso = 6;
+  }
+  if (distIz > 10 && distIz < 55 && distFe > 90 && distFe < 150 && distDe > 10 && distDe < 55) {
+    parpadeoAmbos();
+    estadoposinverso = 5;
+  }
+  if (distIz > 25 && distIz < 100 && distFe > 90 && distFe < 150 && distDe >= 0 && distDe < 30) {
+    parpadeoAzul();
+    estadoposinverso = 4;
+  }
+}
+
+void parpadeoAzul() {
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+  digitalWrite(ledazul, HIGH);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+  digitalWrite(ledazul, HIGH);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+}
+
+void parpadeoAmbos() {
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+  digitalWrite(ledazul, HIGH);
+  digitalWrite(ledrojo, HIGH);
+  delay(50);
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+  digitalWrite(ledazul, HIGH);
+  digitalWrite(ledrojo, HIGH);
+  delay(50);
+}
+
+void parpadeoRojo() {
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, HIGH);
+  delay(50);
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, LOW);
+  delay(50);
+  digitalWrite(ledazul, LOW);
+  digitalWrite(ledrojo, HIGH);
+  delay(50);
+}
+
+void stop() {
+  analogWrite(ENA, 0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  delay(1000);
+}
+
+// --- FUNCIONES DE POSICIÓN (Se mantiene tu lógica de estados, solo usan el nuevo control de servo) ---
+void posicion1velocidad200() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 22.56) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 0;
+  } else if (distancia >= 22.56 && distancia <= 48.21) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 180;
+  } else if (distancia >= 48.21 && distancia <= 70.77) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 180;
+  } else if (distancia >= 70.77 && distancia <= 88.13) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 360;
+  } else if (distancia >= 88.13 && distancia <= 110.69) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 360;
+  } else if (distancia >= 110.69 && distancia <= 128.05) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 540;
+  } else if (distancia >= 128.05 && distancia <= 150.61) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 540;
+  } else if (distancia >= 150.61 && distancia <= 167.97) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 720;
+  } else if (distancia >= 167.97 && distancia <= 190.53) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 705;
+  } else if (distancia >= 190.53 && distancia <= 207.89) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 875;
+  } else if (distancia >= 207.89 && distancia <= 230.45) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 875;
+  } else if (distancia >= 230.45 && distancia <= 247.81) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 1055;
+  } else if (distancia >= 247.81 && distancia <= 270.37) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 1055;
+  } else if (distancia >= 270.37 && distancia <= 287.73) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 1235;
+  } else if (distancia >= 287.73 && distancia <= 310.29) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 1235;
+  } else if (distancia >= 310.29 && distancia <= 327.65) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 1415;
+  } else if (distancia >= 327.65 && distancia <= 350.21) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 1415;
+  } else if (distancia >= 350.21 && distancia <= 367.57) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 1595;
+  } else if (distancia >= 367.57 && distancia <= 390.13) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 1595;
+  } else if (distancia >= 390.13 && distancia <= 407.49) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 1775;
+  } else if (distancia >= 407.49 && distancia <= 430.05) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = true; setpoint = 1775;
+  } else if (distancia >= 430.05 && distancia <= 447.41) {
+    controlarServoIMU(); controlarMotor200(); modoCentradoActivo = false; setpoint = 1955;
+  } else if (distancia >= 447.41 && distancia <= 474.97) {
+    controlarServoIMU(); controlarMotor100(); modoCentradoActivo = true; setpoint = 1955;
+  } else if (distancia >= 480.97 && distancia <= 494) {
+    controlarServoIMU(); controlarMotor100(); modoCentradoActivo = false; setpoint = 2090;
+  } else if (distancia >= 494) {
+    modoCentradoActivo = false; stop();
+  }
+}
+
+// (El resto de tus funciones posicion2velocidad200, posicion3..., posicion1inverso, etc. 
+// se mantienen EXACTAMENTE IGUAL que en tu código original, ya que solo llaman a 
+// controlarServoIMU() o controlarServoIMUpro(), las cuales ya fueron actualizadas arriba).
+// Por brevedad, no las repito todas aquí, pero debes mantenerlas en tu archivo.
+// Solo asegúrate de reemplazar las funciones controlarServoIMU() y controlarServoIMUpro() 
+// con las nuevas que te puse arriba.
+
+void detectarpocisionia() {
+  distIz = IZ.ping_cm();
+  delay(40);
+  distFe = FE.ping_cm();
+  delay(40);
+  distDe = DE.ping_cm();
+  delay(40);
+
+  if (distFe >= 150 && distFe <= 200) {
+    if (distIz <= 30 && distDe > 30) {
+      digitalWrite(ledazul, LOW); digitalWrite(ledrojo, HIGH); estadopos = 1;
+    } else if (distIz > 30 && distDe <= 30) {
+      digitalWrite(ledazul, HIGH); digitalWrite(ledrojo, LOW); estadopos = 3;
+    } else if (distIz > 30 && distDe > 30) {
+      digitalWrite(ledazul, HIGH); digitalWrite(ledrojo, HIGH); estadopos = 2;
+    } else {
+      estadoposinverso = 3;
+    }
+  } else if (distFe > 90 && distFe < 150) {
+    if (distIz <= 30 && distDe > 30) {
+      parpadeoRojo(); estadopos = 4;
+    } else if (distIz > 30 && distDe <= 30) {
+      parpadeoAzul(); estadopos = 6;
+    } else if (distIz > 30 && distDe > 30) {
+      parpadeoAmbos(); estadopos = 5;
+    }
+  }
+}
+
+void posicion2velocidad200() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 22.56) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 0;
+  } else if (distancia >= 22.56 && distancia <= 39.92) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 180;
+  } else if (distancia >= 39.92 && distancia <= 62.48) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 180;
+  } else if (distancia >= 62.48 && distancia <= 79.84) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 360;
+  } else if (distancia >= 79.84 && distancia <= 102.4) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 360;
+  } else if (distancia >= 102.4 && distancia <= 119.76) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 540;
+  } else if (distancia >= 119.76 && distancia <= 142.32) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 540;
+  } else if (distancia >= 142.32 && distancia <= 159.68) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 720;
+  } else if (distancia >= 159.68 && distancia <= 182.24) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 720;
+  } else if (distancia >= 182.24 && distancia <= 199.6) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 880;
+  } else if (distancia >= 199.6 && distancia <= 222.16) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 880;
+  } else if (distancia >= 222.16 && distancia <= 239.52) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 1060;
+  } else if (distancia >= 239.52 && distancia <= 262.08) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 1060;
+  } else if (distancia >= 262.08 && distancia <= 279.44) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 1240;
+  } else if (distancia >= 279.44 && distancia <= 302) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 1240;
+  } else if (distancia >= 302 && distancia <= 319.36) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 1440;
+  } else if (distancia >= 319.36 && distancia <= 341.92) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 1410;
+  } else if (distancia >= 341.92 && distancia <= 345.28) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 1590;
+  } else if (distancia >= 345.28 && distancia <= 381.84) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 1590;
+  } else if (distancia >= 381.84 && distancia <= 399.2) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 1770;
+  } else if (distancia >= 399.2 && distancia <= 421.76) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 1770;
+  } else if (distancia >= 421.76 && distancia <= 439.12) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = 1950;
+  } else if (distancia >= 439.12 && distancia <= 461.68) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 1950;
+  } else if (distancia >= 464.68 && distancia <= 479.04) {
+    controlarServoIMU();
+    controlarMotor100();
+    modoCentradoActivo = true;
+    setpoint = 2140;
+  } else if (distancia >= 484.04) {
+    controlarServoIMU();
+    setpoint = 2140;
+    modoCentradoActivo = true;
+    stop();
+    estadopos = 0;
+  }
+}
+
+void posicion3velocidad200() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 22.56) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 0;
+  } else if (distancia >= 22.56 && distancia <= 56.01) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 180;
+  } else if (distancia >= 56.01 && distancia <= 73.37) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 360;
+  } else if (distancia >= 73.37 && distancia <= 95.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 360;
+  } else if (distancia >= 95.93 && distancia <= 113.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 540;
+  } else if (distancia >= 113.29 && distancia <= 135.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 540;
+  } else if (distancia >= 135.85 && distancia <= 153.21) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 720;
+  }  //////////////////////////////////////////////////////////segunda buelta
+  else if (distancia >= 153.21 && distancia <= 175.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 720;
+  } else if (distancia >= 175.77 && distancia <= 193.13) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 880;
+  } else if (distancia >= 193.13 && distancia <= 215.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 880;
+  } else if (distancia >= 215.69 && distancia <= 233.05) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1060;
+  } else if (distancia >= 233.05 && distancia <= 255.61) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1060;
+  } else if (distancia >= 255.61 && distancia <= 272.97) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1240;
+  } else if (distancia >= 272.97 && distancia <= 295.53) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1240;
+  } else if (distancia >= 295.53 && distancia <= 312.89) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1440;
+  }  /////////////////////////////////////////////////////////// tercer buelta
+  else if (distancia >= 312.89 && distancia <= 335.45) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1410;
+  } else if (distancia >= 335.45 && distancia <= 352.81) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1590;
+  } else if (distancia >= 352.81 && distancia <= 375.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1590;
+  } else if (distancia >= 375.37 && distancia <= 392.73) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1770;
+  } else if (distancia >= 392.73 && distancia <= 415.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1770;
+  } else if (distancia >= 415.29 && distancia <= 432.65) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1950;
+  } else if (distancia >= 432.65 && distancia <= 455.21) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1950;
+  } else if (distancia >= 455.21 && distancia <= 472.57) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 2182;
+  } else if (distancia >= 478 && distancia <= 495.13) {
+    controlarServoIMU();
+    stop();
+    modoCentradoActivo = true;  // ❌ DESACTIVA SENSORES
+    setpoint = 2182;
+  }
+}
+
+void posicion4adelante() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 11.28) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ✅ USA SENSORES
+    setpoint = 0;
+  } else if (distancia >= 11.28 && distancia <= 36.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 180;
+  } else if (distancia >= 36.93 && distancia <= 59.49) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 180;
+  } else if (distancia >= 59.49 && distancia <= 76.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 360;
+  } else if (distancia >= 76.85 && distancia <= 99.41) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 360;
+  } else if (distancia >= 99.41 && distancia <= 116.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 540;
+  } else if (distancia >= 116.77 && distancia <= 139.33) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 540;
+  } else if (distancia >= 139.33 && distancia <= 156.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 720;
+  } else if (distancia >= 156.69 && distancia <= 179.25) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 720;
+  } else if (distancia >= 179.25 && distancia <= 196.61) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 890;
+  } else if (distancia >= 196.61 && distancia <= 219.17) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 890;
+  } else if (distancia >= 219.17 && distancia <= 236.53) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1070;
+  } else if (distancia >= 236.53 && distancia <= 259.09) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1070;
+  } else if (distancia >= 259.09 && distancia <= 276.45) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1250;
+  } else if (distancia >= 276.45 && distancia <= 299.01) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1250;
+  } else if (distancia >= 299.01 && distancia <= 316.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1430;
+  } else if (distancia >= 316.37 && distancia <= 338.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1430;
+  } else if (distancia >= 338.93 && distancia <= 356.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1610;
+  } else if (distancia >= 356.29 && distancia <= 378.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1610;
+  } else if (distancia >= 378.85 && distancia <= 396.21) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1790;
+  } else if (distancia >= 396.21 && distancia <= 418.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1790;
+  } else if (distancia >= 418.77 && distancia <= 436.13) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 1970;
+  } else if (distancia >= 436.13 && distancia <= 458.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1970;
+  } else if (distancia >= 458.69 && distancia <= 476.05) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 2091;
+  } else if (distancia >= 476.05 && distancia <= 487.80) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 2091;
+  } else if (distancia >= 491) {
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    stop();
+  }
+}
+
+void posicion5adelante() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 11.28) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES (Recta)
+    setpoint = 0;
+  } else if (distancia >= 11.28 && distancia <= 28.64) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 180;
+  } else if (distancia >= 28.64 && distancia <= 51.20) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES (Recta)
+    setpoint = 180;
+  } else if (distancia >= 51.20 && distancia <= 68.56) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 360;
+  } else if (distancia >= 68.56 && distancia <= 91.12) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 360;
+  } else if (distancia >= 91.12 && distancia <= 108.48) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 540;
+  } else if (distancia >= 108.48 && distancia <= 131.04) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 540;
+  } else if (distancia >= 131.04 && distancia <= 148.4) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 720;
+  }  //////////////////////////////////////////////////////////////////////segunda buelta
+  else if (distancia >= 148.4 && distancia <= 170.96) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES - 20 al setpoint
+    setpoint = 720;
+  } else if (distancia >= 170.96 && distancia <= 188.32) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 880;
+  } else if (distancia >= 188.32 && distancia <= 210.88) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 880;
+  } else if (distancia >= 210.88 && distancia <= 228.24) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1060;
+  } else if (distancia >= 228.24 && distancia <= 250.8) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1060;
+  } else if (distancia >= 250.8 && distancia <= 268.16) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1240;
+  } else if (distancia >= 268.16 && distancia <= 290.72) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = 1240;
+  } else if (distancia >= 290.72 && distancia <= 308.08) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1420;
+  }
+  /////////////////segunda
+  else if (distancia >= 308.08 && distancia <= 330.64) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1410;
+  } else if (distancia >= 330.64 && distancia <= 348) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1590;
+  } else if (distancia >= 348 && distancia <= 370.56) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1590;
+  } else if (distancia >= 370.56 && distancia <= 387.92) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1770;
+  } else if (distancia >= 387.92 && distancia <= 410.48) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1770;
+  } else if (distancia >= 410.48 && distancia <= 427.84) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1950;
+  } else if (distancia >= 427.84 && distancia <= 450.4) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1950;
+  } else if (distancia >= 450.4 && distancia <= 467.76) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 2140;
+  } else if (distancia >= 467.76 && distancia <= 480.76) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 2140;
+
+  } else if (distancia >= 480) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 2140;
+    stop();
+  }
+}
+
+void posicion6adelante() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 11.28) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 0;
+  } else if (distancia >= 11.28 && distancia <= 45.73) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 180;
+  } else if (distancia >= 45.73 && distancia <= 63.09) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 360;
+  } else if (distancia >= 63.09 && distancia <= 85.65) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 360;
+  } else if (distancia >= 85.65 && distancia <= 103.01) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 540;
+  } else if (distancia >= 103.01 && distancia <= 125.57) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 540;
+  } else if (distancia >= 125.57 && distancia <= 142.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 720;
+  }  /////////////////////////////////////////////////////////segunda buelta
+  else if (distancia >= 142.93 && distancia <= 165.49) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 720;
+  } else if (distancia >= 165.49 && distancia <= 182.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 880;
+  } else if (distancia >= 182.85 && distancia <= 205.41) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 880;
+  } else if (distancia >= 205.41 && distancia <= 222.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1060;
+  } else if (distancia >= 222.77 && distancia <= 245.33) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 1060;
+  } else if (distancia >= 245.33 && distancia <= 262.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1240;
+  } else if (distancia >= 262.69 && distancia <= 285.25) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 1240;
+  } else if (distancia >= 285.25 && distancia <= 302.61) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1420;
+  }  ///////////////////////////////////////////////////////tercera buelta
+  else if (distancia >= 302.61 && distancia <= 325.17) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 1410;
+  } else if (distancia >= 325.17 && distancia <= 342.53) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1590;
+  } else if (distancia >= 342.53 && distancia <= 365.09) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 1590;
+  } else if (distancia >= 365.09 && distancia <= 382.45) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1770;
+  } else if (distancia >= 382.45 && distancia <= 405.01) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 1770;
+  } else if (distancia >= 405.01 && distancia <= 422.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 1950;
+  } else if (distancia >= 422.37 && distancia <= 444.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = 1950;
+  } else if (distancia >= 444.93 && distancia <= 462.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 2170;
+  } else if (distancia >= 462.29 && distancia <= 480) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 2170;
+  } else if (distancia >= 480.28) {
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 2170;
+    stop();
+  }
+}
+
+/////////////////////////////// pocisiones antiorarias (inversas); puldowm == 1
+void posicion1inverso() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 22.56) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ✅ USA SENSORES
+    setpoint = 0;
+  } else if (distancia >= 22.56 && distancia <= 48.21) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -180;
+  } else if (distancia >= 48.21 && distancia <= 70.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -180;
+  } else if (distancia >= 70.77 && distancia <= 88.13) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 88.13 && distancia <= 110.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 110.69 && distancia <= 128.05) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 128.05 && distancia <= 150.61) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 150.61 && distancia <= 167.97) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -720;
+  }  /////////////////////////////////////////////////////////segunda buelta
+  else if (distancia >= 167.97 && distancia <= 190.53) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -720;
+  } else if (distancia >= 190.53 && distancia <= 207.89) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 207.89 && distancia <= 230.45) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 230.45 && distancia <= 247.81) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 247.81 && distancia <= 270.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 270.37 && distancia <= 287.73) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 287.73 && distancia <= 310.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 310.29 && distancia <= 327.65) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1460;
+  }  //////////////////////////////////////////////////////tercer buelta
+  else if (distancia >= 327.65 && distancia <= 350.21) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1470;
+  } else if (distancia >= 350.21 && distancia <= 367.57) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1650;
+  } else if (distancia >= 367.57 && distancia <= 390.13) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1650;
+  } else if (distancia >= 390.13 && distancia <= 407.49) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1830;
+  } else if (distancia >= 407.49 && distancia <= 430.05) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1830;
+  } else if (distancia >= 430.05 && distancia <= 447.41) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -2010;
+  } else if (distancia >= 447.41 && distancia <= 469.97) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -2010;
+  } else if (distancia >= 469.97 && distancia <= 487.33) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -2090;
+  } else if (distancia >= 492.33) {
+
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    stop();
+  }
+}
+
+void posicion2inverso() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 22.56) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = 0;
+  } else if (distancia >= 22.56 && distancia <= 39.92) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -180;
+  } else if (distancia >= 39.92 && distancia <= 62.48) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -180;
+  } else if (distancia >= 62.48 && distancia <= 79.84) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -360;
+  } else if (distancia >= 79.84 && distancia <= 102.4) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -360;
+  } else if (distancia >= 102.4 && distancia <= 119.76) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -540;
+  } else if (distancia >= 119.76 && distancia <= 142.32) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -540;
+  } else if (distancia >= 142.32 && distancia <= 159.68) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -720;
+  } else if (distancia >= 159.68 && distancia <= 182.24) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -720;
+  } else if (distancia >= 182.24 && distancia <= 199.6) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -920;
+  } else if (distancia >= 199.6 && distancia <= 222.16) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -920;
+  } else if (distancia >= 222.16 && distancia <= 239.52) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -1100;
+  } else if (distancia >= 239.52 && distancia <= 262.08) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -1100;
+  } else if (distancia >= 262.08 && distancia <= 279.44) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -1280;
+  } else if (distancia >= 279.44 && distancia <= 302) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -1280;
+  } else if (distancia >= 302 && distancia <= 319.36) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -1460;
+  } else if (distancia >= 319.36 && distancia <= 341.92) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -1470;
+  } else if (distancia >= 341.92 && distancia <= 345.28) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -1650;
+  } else if (distancia >= 345.28 && distancia <= 381.84) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -1650;
+  } else if (distancia >= 381.84 && distancia <= 399.2) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -1830;
+  } else if (distancia >= 399.2 && distancia <= 421.76) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -1830;
+  } else if (distancia >= 421.76 && distancia <= 439.12) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = false;
+    setpoint = -2010;
+  } else if (distancia >= 439.12 && distancia <= 461.68) {
+    controlarServoIMU();
+    controlarMotor200();
+    modoCentradoActivo = true;
+    setpoint = -2010;
+  } else if (distancia >= 464.68 && distancia <= 479.04) {
+    controlarServoIMU();
+    controlarMotor100();
+    modoCentradoActivo = true;
+    setpoint = -2190;
+  } else if (distancia >= 484.04) {
+    controlarServoIMU();
+    setpoint = -2190;
+    modoCentradoActivo = true;
+    stop();
+    estadoposinverso = 0;
+  }
+}
+
+void posicion3inverso() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 22.56) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = 0;
+  } else if (distancia >= 22.56 && distancia <= 56.01) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ❌ DESACTIVA SENSORES
+    setpoint = -180;
+  } else if (distancia >= 56.01 && distancia <= 73.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 73.37 && distancia <= 95.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 95.93 && distancia <= 113.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 113.29 && distancia <= 135.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 135.85 && distancia <= 153.21) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -720;
+  }  //////////////////////////////////////////////////////////segunda buelta
+  else if (distancia >= 153.21 && distancia <= 175.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -720;
+  } else if (distancia >= 175.77 && distancia <= 193.13) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 193.13 && distancia <= 215.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 215.69 && distancia <= 233.05) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 233.05 && distancia <= 255.61) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 255.61 && distancia <= 272.97) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 272.97 && distancia <= 295.53) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 295.53 && distancia <= 312.89) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1460;
+  }  /////////////////////////////////////////////////////////// tercer buelta
+  else if (distancia >= 312.89 && distancia <= 335.45) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1470;
+  } else if (distancia >= 335.45 && distancia <= 352.81) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1650;
+  } else if (distancia >= 352.81 && distancia <= 375.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1650;
+  } else if (distancia >= 375.37 && distancia <= 392.73) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1830;
+  } else if (distancia >= 392.73 && distancia <= 415.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1830;
+  } else if (distancia >= 415.29 && distancia <= 432.65) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -2010;
+  } else if (distancia >= 432.65 && distancia <= 453) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -2010;
+  } else if (distancia >= 453 && distancia <= 470.57) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -2200;
+  } else if (distancia >= 474.57) {
+    stop();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -2180;
+  }
+}
+
+void posicion4inversodelante() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 11.28) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ✅ USA SENSORES
+    setpoint = 0;
+  } else if (distancia >= 11.28 && distancia <= 36.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -180;
+  } else if (distancia >= 36.93 && distancia <= 59.49) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -180;
+  } else if (distancia >= 59.49 && distancia <= 76.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 76.85 && distancia <= 99.41) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 99.41 && distancia <= 116.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 116.77 && distancia <= 139.33) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 139.33 && distancia <= 156.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -720;
+  } else if (distancia >= 156.69 && distancia <= 179.25) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -720;
+  } else if (distancia >= 179.25 && distancia <= 196.61) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 196.61 && distancia <= 219.17) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 219.17 && distancia <= 236.53) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 236.53 && distancia <= 259.09) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 259.09 && distancia <= 276.45) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 276.45 && distancia <= 299.01) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 299.01 && distancia <= 316.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1460;
+  }  ////////////////////////////////tercer buelta
+  else if (distancia >= 316.37 && distancia <= 338.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1470;
+  } else if (distancia >= 338.93 && distancia <= 356.29) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1650;
+  } else if (distancia >= 356.29 && distancia <= 378.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1650;
+  } else if (distancia >= 378.85 && distancia <= 396.21) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -1830;
+  } else if (distancia >= 396.21 && distancia <= 418.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1830;
+  } else if (distancia >= 418.77 && distancia <= 436.13) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -2010;
+  } else if (distancia >= 436.13 && distancia <= 458.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -2010;
+  } else if (distancia >= 460.74 && distancia <= 487.80) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES
+    setpoint = -2149;
+  } else if (distancia >= 493) {
+    modoCentradoActivo = false;  // ✅ USA SENSORES
+    stop();
+  }
+}
+
+void posicion5inversodelante() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 11.28) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES (Recta)
+    setpoint = 0;
+  } else if (distancia >= 11.28 && distancia <= 28.64) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -180;
+  } else if (distancia >= 28.64 && distancia <= 51.20) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES (Recta)
+    setpoint = -180;
+  } else if (distancia >= 51.20 && distancia <= 68.56) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -360;
+  } else if (distancia >= 68.56 && distancia <= 91.12) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 91.12 && distancia <= 108.48) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -540;
+  } else if (distancia >= 108.48 && distancia <= 131.04) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 131.04 && distancia <= 148.4) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -720;
+  }  //////////////////////////////////////////////////////////////////////segunda buelta
+  else if (distancia >= 148.4 && distancia <= 170.96) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES - 20 al setpoint
+    setpoint = -720;
+  } else if (distancia >= 170.96 && distancia <= 188.32) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -920;
+  } else if (distancia >= 188.32 && distancia <= 210.88) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 210.88 && distancia <= 228.24) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1100;
+  } else if (distancia >= 228.24 && distancia <= 250.8) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 250.8 && distancia <= 268.16) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1280;
+  } else if (distancia >= 268.16 && distancia <= 290.72) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅ USA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 290.72 && distancia <= 308.08) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1460;
+  }
+  /////////////////segunda
+  else if (distancia >= 308.08 && distancia <= 330.64) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ✅DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1470;
+  } else if (distancia >= 330.64 && distancia <= 348) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1650;
+  } else if (distancia >= 348 && distancia <= 370.56) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1650;
+  } else if (distancia >= 370.56 && distancia <= 387.92) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1830;
+  } else if (distancia >= 387.92 && distancia <= 410.48) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1830;
+  } else if (distancia >= 410.48 && distancia <= 427.84) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2010;
+  } else if (distancia >= 427.84 && distancia <= 450.4) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2010;
+  } else if (distancia >= 450.4 && distancia <= 467.76) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2190;
+  } else if (distancia >= 467.76 && distancia <= 480.76) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2190;
+
+  } else if (distancia >= 480) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2190;
+    stop();
+  }
+}
+
+void posicion6inversodelante() {
+  float distancia = obtenerDistanciaCm();
+  if (distancia >= 0 && distancia <= 11.28) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = 0;
+  } else if (distancia >= 11.28 && distancia <= 45.73) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -180;
+  } else if (distancia >= 45.73 && distancia <= 63.09) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -360;
+  } else if (distancia >= 63.09 && distancia <= 85.65) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -360;
+  } else if (distancia >= 85.65 && distancia <= 103.01) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -540;
+  } else if (distancia >= 103.01 && distancia <= 125.57) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -540;
+  } else if (distancia >= 125.57 && distancia <= 142.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -720;
+  }  /////////////////////////////////////////////////////////segunda buelta
+  else if (distancia >= 142.93 && distancia <= 165.49) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -720;
+  } else if (distancia >= 165.49 && distancia <= 182.85) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -920;
+  } else if (distancia >= 182.85 && distancia <= 205.41) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -920;
+  } else if (distancia >= 205.41 && distancia <= 222.77) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1100;
+  } else if (distancia >= 222.77 && distancia <= 245.33) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -1100;
+  } else if (distancia >= 245.33 && distancia <= 262.69) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1280;
+  } else if (distancia >= 262.69 && distancia <= 285.25) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -1280;
+  } else if (distancia >= 285.25 && distancia <= 302.61) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1460;
+  }  ///////////////////////////////////////////////////////tercera buelta
+  else if (distancia >= 302.61 && distancia <= 325.17) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -1470;
+  } else if (distancia >= 325.17 && distancia <= 342.53) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1650;
+  } else if (distancia >= 342.53 && distancia <= 365.09) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -1650;
+  } else if (distancia >= 365.09 && distancia <= 382.45) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -1830;
+  } else if (distancia >= 382.45 && distancia <= 405.01) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -1830;
+  } else if (distancia >= 405.01 && distancia <= 422.37) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2010;
+  } else if (distancia >= 422.37 && distancia <= 444.93) {
+    controlarMotor200();
+    controlarServoIMU();
+    modoCentradoActivo = true;  //✅ USA SENSORES
+    setpoint = -2010;
+  } else if (distancia >= 444.93 && distancia <= 462.29) {
+    controlarMotor100();
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2150;
+  } else if (distancia >= 479) {
+    controlarServoIMU();
+    modoCentradoActivo = false;  // ❌ DESACTIVA SENSORES (Curva/Cruce)
+    setpoint = -2150;
+    stop();
+  }
+}
+
+void detectarpocisioninversoia() {
+  distIz = IZ.ping_cm();
+  delay(40);
+  distFe = FE.ping_cm();
+  delay(40);
+  distDe = DE.ping_cm();
+  delay(40);
+
+  if (distFe >= 150 && distFe <= 200) {
+    if (distDe <= 30 && distIz > 30) {
+      digitalWrite(ledazul, HIGH); digitalWrite(ledrojo, LOW); estadoposinverso = 1;
+    } else if (distIz > 30 && distDe > 30) {
+      digitalWrite(ledazul, HIGH); digitalWrite(ledrojo, HIGH); estadoposinverso = 2;
+    } else if (distIz <= 30 && distDe > 30) {
+      digitalWrite(ledazul, LOW); digitalWrite(ledrojo, HIGH); estadoposinverso = 3;
+    } else {
+      estadoposinverso = 3;
+    }
+  } else if (distFe > 90 && distFe < 150) {
+    if (distDe <= 30 && distIz > 30) {
+      parpadeoAzul(); estadoposinverso = 4;
+    } else if (distIz > 30 && distDe > 30) {
+      parpadeoAmbos(); estadoposinverso = 5;
+    } else if (distIz <= 30 && distDe > 30) {
+      parpadeoRojo(); estadoposinverso = 6;
+    }
+  }
+}
