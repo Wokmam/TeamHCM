@@ -433,7 +433,7 @@ volatile long ticks = 0;
 const float CM_POR_TICK = 0.01;
 
 void setup() {
-  // ...
+  //
   attachInterrupt(digitalPinToInterrupt(Clk), ENCODER, CHANGE);
 }
 
