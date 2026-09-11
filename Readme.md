@@ -380,32 +380,38 @@ void loop() {
 ```
 esta parte del codigo se encarga de ubicar el sentido del carro para hacer que en las variables puedan girar gracias al servo motor
 
-## sensores de ultra sonido
+# Sistema de Ultrasonidos (NewPing)
+
+El robot utiliza **tres sensores ultrasónicos** gestionados a través de la librería `NewPing` para medir distancias de manera eficiente, detectar posiciones de referencia en la pista y asistir en el centrado lateral dentro de los pasillos.
+
+## 📌 Pines de Conexión
+
+| Sensor | Definición en Código | Pin Trigger (Trig) | Pin Echo (Echo) | Descripción / Función |
+| :--- | :--- | :--- | :--- | :--- |
+| **Izquierdo** | `IZ` | `31` | `30` | Medición lateral izquierda y cálculo de error de centrado. |
+| **Medio (Frontal)** | `FE` | `27` | `29` | Detección frontal de obstáculos y control de distancia de frenado. |
+| **Derecho** | `DE` | `23` | `25` | Medición lateral derecha y cálculo de error de centrado. |
+
+* **Distancia Máxima Configurada:** `400 cm` (`Max_Dist` definido por `#define Max_Dist 400`).
+
+---
+
+## ⚙️ Funciones Principales
+
+### 1. Actualización No Bloqueante (`actualizarDistancias`)
+Para evitar que las demoras de los pulsos ultrasónicos detengan la ejecución del bucle principal y afecten la lectura de la IMU y los motores, las lecturas se actualizan mediante un intervalo de tiempo controlado por `millis()`:
+* **Intervalo de muestreo:** `20 ms` (`const int intervaloPing = 20`).
+* **Variables globales actualizadas:** `distIz`, `distDe` y `distFe`.
+
 ```cpp
-
-#define Clk 3
-#define Dt 2
-volatile long ticks = 0;
-const float CM_POR_TICK = 0.01;
-
-void setup() {
-  // ...
-  attachInterrupt(digitalPinToInterrupt(Clk), ENCODER, CHANGE);
+void actualizarDistancias() {
+  if (millis() - ultimoPing >= intervaloPing) {
+    distIz = IZ.ping_cm();
+    distDe = DE.ping_cm();
+    distFe = FE.ping_cm();
+    ultimoPing = millis();
+  }
 }
-
-void ENCODER() {
-  int A = digitalRead(Clk); int B = digitalRead(Dt);
-  // Lógica de cuadratura para sumar/restar ticks
-  if (A == 1) ticks += (B == 0) ? 1 : -1; 
-}
-
-float obtenerDistanciaCm() {
-  long t; noInterrupts(); t = ticks; interrupts();
-  return t * CM_POR_TICK;
-}
-```
-esta parte del codigo se encarga de ubicar el carro en las diferentes pociciones de salida 
-
 ## pasos contados de los motores 
 ```cpp
 #define Clk 3
@@ -453,6 +459,7 @@ void posicion4adelante()       { /* Intervalos y setpoints para ruta 4 */ }
 void posicion5adelante()       { /* Intervalos y setpoints para ruta 5 */ }
 void posicion6adelante()       { /* Intervalos y setpoints para ruta 6 */ }
 ```
+
 esta parte del codigo tiene la capacidad de decidir que ruta hace el robot de pendiendo de los valores del  giroscopio y los sensores de ultra sonido
 
 ## pulldow
