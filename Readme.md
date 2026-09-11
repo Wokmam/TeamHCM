@@ -1,6 +1,5 @@
-<h1>Somos el Team Born To Win WRO Future Engineers</h1>
+# 🤖 Team Born To Win - WRO Future Engineers
 
-# 🤖 Team HCM - WRO Future Engineers
 
 ¡Bienvenidos al repositorio oficial de nuestro equipo! Aquí documentamos todo el desarrollo, código, diseño y avances para nuestra participación.
 
