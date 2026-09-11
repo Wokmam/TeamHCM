@@ -21,7 +21,7 @@
     <td align="center" width="33%">
       <h3>Miguel Salas</h3>
       <p><b>Edad:</b> 18 años</p>
-      <p><b>Rol:</b> Mecánica, diseño 3D y electrónica</p>
+      <p><b>Rol:</b> Mecánica, diseño 3D y electrónica, programación</p>
     </td>
   </tr>
 </table>
