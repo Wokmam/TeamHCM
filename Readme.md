@@ -13,7 +13,8 @@
  <p align="center">
   somos estudiantes de diferentes edades que nos reunimos con el objetivo de competir en la competencia WRO futuros ingenieros con nuestro proyecto
  </p> 
-## 👥 Nuestro Equipo
+ 
+ ## Nuestro Equipo
 
 <table align="center">
   <tr>
