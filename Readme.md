@@ -314,6 +314,32 @@ void loop() {
 }
 ```
 esta parte del codigo se encarga de controlar el  motor para despues integrarlo a las variables 
+control del servo motor y giroscopio
+```cpp
+#include <Wire.h>
+#include <MPU6050_tockn.h>
+#include <Servo.h>
+
+#define PIN_SERVO 7
+MPU6050 mpu(Wire);
+Servo myservo;
+float yaw, setpoint = 0, centroServo = 82, Kp = 0.8;
+
+void setup() {
+  Wire.begin(); mpu.begin(); myservo.attach(PIN_SERVO);
+  myservo.write(centroServo);
+}
+
+void loop() {
+  mpu.update();
+  yaw = mpu.getAngleZ();
+  float error = setpoint - yaw;
+  float salida = Kp * error;
+  int anguloServo = constrain(centroServo + salida, 71, 93);
+  myservo.write(anguloServo);
+}
+```
+esta parte del codigo se encarga de ubicar el sentido del carro para hacer que en las variables puedan girar gracias al servo motor
 
 <h2>Lista de Componentes</h2>
 
