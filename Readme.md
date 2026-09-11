@@ -5,9 +5,6 @@
 ¡Bienvenidos al repositorio oficial de nuestro equipo! Aquí documentamos todo el desarrollo, código, diseño y avances para nuestra participación.
 
 
-## 👥 Nuestro Equipo
-
-
 ## 📸 Conoce al Equipo
 
 <p align="center">
